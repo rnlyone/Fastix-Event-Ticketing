@@ -54,8 +54,13 @@
             </div>
         </div>
     </div>
-    <a href="#" data-menu="menu-cart-item"
+    @if ($eventdetail->selesai_event > date('Y-m-d H:i:s'))
+        <a href="#" data-menu="menu-cart-item"
         class="btn btn-full btn-margins rounded-sm gradient-highlight font-14 font-600 btn-xl">Reservasi Tiket</a>
+    @else
+        <a href="#"
+        class="btn btn-border btn-full btn-margins rounded-sm border-blue-dark color-blue-dark font-14 font-600 btn-xl">Event Sudah Selesai</a>
+    @endif
 </div>
 
 

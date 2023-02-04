@@ -1,5 +1,23 @@
 @include('pwa.layouts.header', ['title' => ': Profil Saya', 'pagetitle' => 'Profil Saya', 'customcss' => ''])
 
+<div class="card card-style s card-full-left bg-17" data-card-height="230">
+    <div class="card rounded-0 shadow-xl" data-card-height="cover" style="width:100px; z-index:99;">
+        <div class="card-center text-center">
+            <h6 class="font-24 text-uppercase font-900 opacity-30">Detail</h6>
+            <h4 class="font-20 font-900">Ticket</h4>
+        </div>
+    </div>
+    <div class="card-top ps-5 ms-5 pt-3">
+        <div class="ps-4">
+            <h1 class="color-white pt-3 pb-3">{{$detail->ticket->event->nama_event}}</h1>
+            <p class="color-white mb-0"><i class="fa fa-mobile color-white pe-2 icon-30"></i>{{$detail->ticket->nama_tiket}}</p>
+            <p class="color-white mb-0"><i class="fa fa-map-marker color-white pe-2 icon-30"></i>{{$detail->jumlah}} Tiket</p>
+            <p class="color-white mb-0"><i class="fa fa-map-marker color-white pe-2 icon-30"></i>{{$detail->ticket->event->mulai_event}}</p>
+        </div>
+    </div>
+    <div class="card-overlay bg-black opacity-70"></div>
+</div>
+
 <div class="page-content">
     @foreach ($tixes as $tix)
     <div class="card card-style">
@@ -24,24 +42,6 @@
         </div>
     </div>
 @endforeach
-
-<div class="card card-style s card-full-left bg-17" data-card-height="230">
-    <div class="card rounded-0 shadow-xl" data-card-height="cover" style="width:100px; z-index:99;">
-        <div class="card-center text-center">
-            <h6 class="font-24 text-uppercase font-900 opacity-30">Detail</h6>
-            <h4 class="font-20 font-900">Ticket</h4>
-        </div>
-    </div>
-    <div class="card-top ps-5 ms-5 pt-3">
-        <div class="ps-4">
-            <h1 class="color-white pt-3 pb-3">{{$detail->ticket->event->nama_event}}</h1>
-            <p class="color-white mb-0"><i class="fa fa-mobile color-white pe-2 icon-30"></i>{{$detail->ticket->nama_tiket}}</p>
-            <p class="color-white mb-0"><i class="fa fa-map-marker color-white pe-2 icon-30"></i>{{$detail->jumlah}} Tiket</p>
-            <p class="color-white mb-0"><i class="fa fa-map-marker color-white pe-2 icon-30"></i>{{$detail->ticket->event->mulai_event}}</p>
-        </div>
-    </div>
-    <div class="card-overlay bg-black opacity-70"></div>
-</div>
 </div>
 
 @include('pwa.layouts.footer')
