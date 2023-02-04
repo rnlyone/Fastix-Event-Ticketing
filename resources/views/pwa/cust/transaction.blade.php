@@ -59,4 +59,6 @@
         </div>
     </div>
 </div>
+
+@include('pwa.layouts.toaster')
 @include('pwa.layouts.footer')
