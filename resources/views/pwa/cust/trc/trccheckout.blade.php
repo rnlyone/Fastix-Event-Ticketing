@@ -61,6 +61,8 @@
                 </div>
             </div>
             <div class="divider"></div>
+            <p class="text-center font-11 opacity-50 mb-0">Panduan Pembayaran!</p>
+            <p class="text-center font-11 opacity-50 mb-0">1. Jangan me-refresh halaman selama pembayaran berlangsung</p>
             <a href="#" id="pay-button" class="btn btn-full btn-l rounded-s font-600 gradient-highlight">Bayar
                 Sekarang</a>
         </div>
