@@ -43,7 +43,8 @@
             }
 
             navigator.mediaDevices.getUserMedia({
-                    video: { facingMode: { exact: "environment" } }
+                    video: { facingMode: { exact: "environment" } },
+                    mirror:false
                 })
                 .then(function (stream) {
                     var scanner = new Instascan.Scanner({
