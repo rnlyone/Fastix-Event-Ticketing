@@ -128,17 +128,14 @@ class OrderController extends Controller
 
         $tix = Order::find($request->order_id);
 
-        if($statcode == '406'){
-
-            return redirect()->route('cust.transaction')->with('gagal', 'gagal');
-        }
-
         if($statcode == '200'){
             $tix->update([
                 'status_bayar' => 'sukses',
             ]);
 
             return redirect()->route('cust.ticket')->with('sukses', 'Cek Tiket Kamu');
+        } else {
+            return redirect()->route('cust.transaction')->with('gagal', 'gagal '.$statcode);
         }
 
     }

@@ -85,6 +85,15 @@
     <a href="#" class="close-menu btn btn-m btn-center-l button-s shadow-l rounded-s text-uppercase font-600 bg-white color-black">Kembali</a>
 </div>
 
+<div id="menu-warning-406" class="menu menu-box-modal bg-red-dark rounded-m" data-menu-height="310" data-menu-width="350">
+    <h1 class="text-center mt-4"><i class="fa fa-3x fa-times-circle scale-box gradient-yellow shadow-xl rounded-circle"></i></h1>
+    <h1 class="text-center mt-3 text-uppercase color-warning font-700">Pembayaran Tertunda</h1>
+    <p class="boxed-text-l color-warning opacity-70">
+        Harap untuk menyelesaikan Pembayaran anda.<br>
+    </p>
+    <a href="#" class="close-menu btn btn-m btn-center-l button-s shadow-l rounded-s text-uppercase font-600 bg-white color-black">Kembali</a>
+</div>
+
 <div id="menu-success-2" class="menu menu-box-modal bg-green-dark rounded-m" data-menu-height="310" data-menu-width="350">
     <h1 class="text-center mt-4"><i class="fa fa-3x fa-check-circle scale-box color-white shadow-xl rounded-circle"></i></h1>
     <h1 class="text-center mt-3 font-700 color-white">Pembayaran Sukses</h1>
@@ -119,6 +128,7 @@
             console.log(result);
             var warningmodal1 = document.getElementById("menu-warning-3");
             warningmodal1.classList.add("menu-active");
+            sendtocontroller(result);
         },
         onError: function(result){
           /* You may add your own implementation here */
@@ -131,6 +141,7 @@
           /* You may add your own implementation here */
           var warningmodal1 = document.getElementById("menu-warning-3");
             warningmodal1.classList.add("menu-active");
+            sendtocontroller(result);
         }
       });
       // customer will be redirected after completing payment pop-up
