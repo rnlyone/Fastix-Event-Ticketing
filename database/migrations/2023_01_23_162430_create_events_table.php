@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('events', function (Blueprint $table) {
             $table->id();
-            $table->string('uuid')->unique();
+            $table->string('uuid', 255)->unique();
             $table->foreignId('id_eo')->constrained('users')->onDelete('cascade');
             $table->string('nama_event');
             $table->text('sinopsis');
