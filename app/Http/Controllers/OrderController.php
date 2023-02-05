@@ -143,7 +143,9 @@ class OrderController extends Controller
     public function midtrans_response(Request $request)
     {
         $response = $request->response;
-        dd($response);
+        $statcode = $response['status_code'];
+        $order_id = $response['order_id'];
+        dd($response, $statcode, $order_id);
     }
 
     public function finishedpayment(Request $request)
@@ -151,14 +153,16 @@ class OrderController extends Controller
         $response = $request->response;
         $statcode = $response['status_code'];
         $order_id = $response['order_id'];
-        dd($response);
+        dd($response, $statcode, $order_id);
         return redirect()->route('cust.ticket')->with('sukses', 'Cek Tiket Kamu');
     }
 
     public function unfinishedpayment(Request $request)
     {
         $response = $request->response;
-        dd($response);
+        $statcode = $response['status_code'];
+        $order_id = $response['order_id'];
+        dd($response, $statcode, $order_id);
         return redirect()->route('cust.transaction')->with('gagal', 'gagal');
     }
 
