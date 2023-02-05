@@ -43,7 +43,7 @@
                     <em>(required)</em>
                 </div>
                 <div class="input-style has-borders no-icon input-style-always-active validate-field mb-4">
-                    <input type="date" name="tgl_lahir" class="form-control validate-text" id="form6" value="{{$custdata->tgl_lahir}}" required>
+                    <input type="date" name="tgl_lahir" class="form-control validate-text" id="form6" value="{{$custdata->tgl_lahir ?? ""}}" required>
                     <label for="form1" class="color-highlight">Tanggal Lahir</label>
                     <i class="fa fa-times disabled invalid color-red-dark"></i>
                     <i class="fa fa-check disabled valid color-green-dark"></i>
