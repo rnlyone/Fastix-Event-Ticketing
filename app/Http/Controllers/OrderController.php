@@ -124,7 +124,7 @@ class OrderController extends Controller
     {
         $adminfee = 5500;
         $order = Order::where('uuid', $uuid)->first();
-        return view('pwa.cust.trc.trccheckout', [
+        return view('pwa.cust.trc.trcinvoice', [
             'order' => $order,
             'adminfee' => $adminfee,
             'transaksi' => 'active-nav',
