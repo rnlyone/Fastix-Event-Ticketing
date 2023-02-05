@@ -25,7 +25,12 @@ class CustomerController extends Controller
     public function custProfile()
     {
         $userdata = User::find(auth()->user()->id);
-        return view('pwa.cust.profile', ['profile' => 'active-nav', 'userdata' => $userdata]);
+        try {
+            $custdata = Customer::where('id_user', $userdata->id)->first();
+        } catch (\Throwable $th) {
+            $custdata = NULL;
+        }
+        return view('pwa.cust.profile', ['profile' => 'active-nav', 'userdata' => $userdata, 'custdata' => $custdata]);
     }
 
     public function custTicket()
@@ -107,6 +112,7 @@ class CustomerController extends Controller
             ]);
     }
 
+
     /**
      * Display a listing of the resource.
      *
@@ -164,14 +170,29 @@ class CustomerController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Customer $customer)
+    public function update(Request $request)
     {
-        //
+        $customer = Customer::firstOrNew(['id_user' => auth()->user()->id]);
+        $customer->nama_lengkap = $request['nama_lengkap'];
+        $customer->jk = $request['jk'];
+        $customer->tgl_lahir = $request['tgl_lahir'];
+        $customer->save();
+
+        return back()->with('sukses', 'Berhasil Simpan');
     }
 
+    public function newupdate(Request $request)
+    {
+        $customer = Customer::firstOrNew(['id_user' => auth()->user()->id]);
+        $customer->nama_lengkap = $request->nama_lengkap;
+        $customer->jk = $request->jk;
+        $customer->tgl_lahir = $request->tgl_lahir;
+        $customer->save();
+
+        return back()->with('sukses', 'Berhasil Simpan');
+    }
     /**
      * Remove the specified resource from storage.
      *
