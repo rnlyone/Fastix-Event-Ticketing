@@ -145,7 +145,22 @@ class OrderController extends Controller
         $response = json_decode($request->response);
         $statcode = $response->status_code;
         $order_id = $response->order_id;
-        dd($response, $statcode, $order_id);
+
+        $string = $order_id;
+        $array = explode("-", $string);
+        $result = $array[1];
+
+        $tix = Order::find($result);
+
+        if($statcode == '200'){
+            $tix->update([
+                'status_bayar' => 'sukses',
+            ]);
+
+            return redirect()->route('cust.ticket')->with('sukses', 'Cek Tiket Kamu');
+        } else {
+            return redirect()->route('cust.transaction')->with('gagal', 'gagal '.$statcode);
+        }
     }
 
     public function finishedpayment(Request $request)
@@ -153,8 +168,22 @@ class OrderController extends Controller
         $response = json_decode($request->response);
         $statcode = $response->status_code;
         $order_id = $response->order_id;
-        dd($response, $statcode, $order_id);
-        return redirect()->route('cust.ticket')->with('sukses', 'Cek Tiket Kamu');
+
+        $string = $order_id;
+        $array = explode("-", $string);
+        $result = $array[1];
+
+        $tix = Order::find($result);
+
+        if($statcode == '200'){
+            $tix->update([
+                'status_bayar' => 'sukses',
+            ]);
+
+            return redirect()->route('cust.ticket')->with('sukses', 'Cek Tiket Kamu');
+        } else {
+            return redirect()->route('cust.transaction')->with('gagal', 'gagal '.$statcode);
+        }
     }
 
     public function unfinishedpayment(Request $request)
@@ -162,8 +191,22 @@ class OrderController extends Controller
         $response = json_decode($request->response);
         $statcode = $response->status_code;
         $order_id = $response->order_id;
-        dd($response, $statcode, $order_id);
-        return redirect()->route('cust.transaction')->with('gagal', 'gagal');
+
+        $string = $order_id;
+        $array = explode("-", $string);
+        $result = $array[1];
+
+        $tix = Order::find($result);
+
+        if($statcode == '200'){
+            $tix->update([
+                'status_bayar' => 'sukses',
+            ]);
+
+            return redirect()->route('cust.ticket')->with('sukses', 'Cek Tiket Kamu');
+        } else {
+            return redirect()->route('cust.transaction')->with('gagal', 'gagal '.$statcode);
+        }
     }
 
     /**
