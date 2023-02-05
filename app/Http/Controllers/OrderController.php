@@ -120,6 +120,16 @@ class OrderController extends Controller
         ]);
     }
 
+    public function finvoice($uuid)
+    {
+        $order = Order::where('uuid', $uuid)->first();
+        return view('pwa.cust.trc.trccheckout', [
+            'order' => $order,
+            'transaksi' => 'active-nav',
+        ]);
+
+    }
+
     public function response(Request $request)
     {
         $respons = json_decode($request->json);
@@ -133,7 +143,7 @@ class OrderController extends Controller
                 'status_bayar' => 'sukses',
             ]);
 
-            return redirect()->route('cust.ticket')->with('sukses', 'Cek Tiket Kamu');
+            return redirect()->route('cust.invoice', ['uuid' => $tix->uuid])->with('sukses', 'Cek Tiket Kamu');
         } else {
             return redirect()->route('cust.transaction')->with('gagal', 'gagal '.$statcode);
         }
@@ -157,7 +167,7 @@ class OrderController extends Controller
                 'status_bayar' => 'sukses',
             ]);
 
-            return redirect()->route('cust.ticket')->with('sukses', 'Cek Tiket Kamu');
+            return redirect()->route('cust.invoice', ['uuid' => $tix->uuid])->with('sukses', 'Cek Tiket Kamu');
         } else {
             return back()->with('gagal', 'gagal '.$statcode);
         }
@@ -180,7 +190,7 @@ class OrderController extends Controller
                 'status_bayar' => 'sukses',
             ]);
 
-            return redirect()->route('cust.ticket')->with('sukses', 'Cek Tiket Kamu');
+            return redirect()->route('cust.invoice', ['uuid' => $tix->uuid])->with('sukses', 'Cek Tiket Kamu');
         } else {
             return back()->with('gagal', 'gagal '.$statcode);
         }
@@ -203,7 +213,7 @@ class OrderController extends Controller
                 'status_bayar' => 'sukses',
             ]);
 
-            return redirect()->route('cust.ticket')->with('sukses', 'Cek Tiket Kamu');
+            return redirect()->route('cust.invoice', ['uuid' => $tix->uuid])->with('sukses', 'Cek Tiket Kamu');
         } else {
             return back()->with('gagal', 'gagal '.$statcode);
         }

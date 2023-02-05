@@ -45,6 +45,7 @@ Route::group(['middleware'=>['auth']], function(){
         Route::get('/cust/event/{uuid}', [CustomerController::class, 'custEvent'])->name('cust.event');
         Route::get('/cust/transaction', [CustomerController::class, 'custTransaction'])->name('cust.transaction');
         Route::get('/cust/checkout/{uuid}', [OrderController::class, 'fcheckout'])->name('cust.checkout');
+        Route::get('/cust/invoice/{uuid}', [OrderController::class, 'finvoice'])->name('cust.invoice');
         Route::get('/cust/ticket/{order}/{detail}', [CustomerController::class, 'custDetailTicket'])->name('cust.detailticket');
 
         Route::post('/cust/ordernow', [OrderController::class, 'ordernow'])->name('cust.ordernow');

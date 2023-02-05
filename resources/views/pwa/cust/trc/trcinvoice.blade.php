@@ -5,8 +5,8 @@
         <div class="content">
             <div class="d-flex">
                 <div class="mt-1">
-                    <p class="color-highlight font-600 mb-n1">Tiket Event</p>
-                    <h1>Bayar Tiket</h1>
+                    <p class="color-highlight font-600 mb-n1">Nota Pembelian</p>
+                    <h1>Invoice Pembayaran</h1>
                 </div>
                 <div class="ms-auto">
                     <span class="icon icon-s gradient-yellow color-white rounded-sm shadow-xxl"><i
@@ -60,7 +60,6 @@
                     <h3>Rp. {{number_format($order->jumlah_bayar)}} </h3>
                 </div>
             </div>
-            <div class="divider"></div>
         </div>
     </div>
 </div>

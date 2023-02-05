@@ -34,7 +34,7 @@
         <div data-bs-parent="#tab-group-1" class="collapse" id="tab-2">
             <div class="card card-style p-3">
                 @foreach ($orders as $order)
-                <a href="{{route('cust.checkout', ['uuid' => $order->uuid])}}" class="d-flex">
+                <a href="{{route('cust.invoice', ['uuid' => $order->uuid])}}" class="d-flex">
                     <div class="align-self-center">
                         <span class="icon icon-s gradient-green color-white rounded-sm shadow-xxl"><i class="fab fa-spotify font-20"></i></span>
                     </div>
