@@ -40,7 +40,6 @@ class CustomerController extends Controller
             ->where('orders.status_bayar', '=', 'sukses')
             ->get();
 
-
         return view('pwa.cust.ticket', [
             'ticket' => 'active-nav',
             'tickets' => $tikets,
@@ -49,11 +48,10 @@ class CustomerController extends Controller
 
     public function custDetailTicket($order, $detail)
     {
+
         $ord = Order::where('uuid', $order)->first();
         $det = OrderDetail::find($detail);
-
-        // dd($det->id_order, $ord->id);
-        if ($det->id_order == $ord->id){
+        // dd($ord->id, $det->id_order);
             $tixes = $det->paidtix;
             return view('pwa.cust.redeemticket', [
                 'ticket' => 'active-nav',
@@ -61,9 +59,6 @@ class CustomerController extends Controller
                 'detail' => $det,
                 'tixes' => $tixes
             ]);
-        } else {
-            return back()->with('gagal', '404');
-        }
     }
 
     public function custScan()

@@ -128,7 +128,7 @@ class OrderController extends Controller
 
         $tix = Order::find($request->order_id);
 
-        if($statcode == '200'){
+        if($statcode == '200' || '201'){
             $tix->update([
                 'status_bayar' => 'sukses',
             ]);
@@ -138,6 +138,12 @@ class OrderController extends Controller
             return redirect()->route('cust.transaction')->with('gagal', 'gagal '.$statcode);
         }
 
+    }
+
+    public function midtrans_response(Request $request)
+    {
+        $response = json_decode($request->json);
+        dd($response);
     }
 
     /**

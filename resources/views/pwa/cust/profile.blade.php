@@ -115,7 +115,28 @@
             </div>
         </div>
     </div>
-    <div data-menu-load="{{route('menufooter')}}"></div>
+    <div class="card card-style">
+        <div class="content mb-0 mt-0">
+            <div class="list-group list-custom-large list-icon-0 check-visited">
+                <a href="#" class=" visited-link"><i
+                        class="fa fa-cog rounded-sm gradient-dark color-white"></i>
+                    <span class="font-14">Settings</span>
+                    <strong class="font-10">More</strong>
+                    <i class="fa fa-arrow-left"></i>
+                </a>
+                <a href="{{route('logout')}}" class=" visited-link"><i
+                        class="fa fa-sign-out rounded-sm gradient-red color-white"></i>
+                    <span class="font-14">Logout</span>
+                    <strong class="font-10">Keluar dari Akun Fastix Kamu</strong>
+                    <i class="fa fa-arrow-left"></i>
+                </a>
+            </div>
+            <p class="font-11 opacity-70 font-italic line-height-s pt-4 pb-4"><strong
+                    class="color-highlight">Note</strong>. When selecting a page, and coming back, it will be marked
+                with a <i class="fa fa-check-circle color-green-dark ps-1 pe-1"></i> icon to make it easier for you to
+                keep track of pages you've visited.</p>
+        </div>
+    </div>
 
     @include('pwa.layouts.toaster')
 </div>

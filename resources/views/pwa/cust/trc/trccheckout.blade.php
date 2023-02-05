@@ -61,10 +61,9 @@
                 </div>
             </div>
             <div class="divider"></div>
-            <p class="text-center font-11 opacity-50 mb-0">Panduan Pembayaran!</p>
-            <p class="text-center font-11 opacity-50 mb-0">1. Jangan me-refresh halaman selama pembayaran berlangsung</p>
             <a href="#" id="pay-button" class="btn btn-full btn-l rounded-s font-600 gradient-highlight">Bayar
                 Sekarang</a>
+                <p class="text-center font-11 opacity-50 mb-0">Jangan me-refresh halaman</p>
         </div>
     </div>
 </div>
@@ -143,7 +142,6 @@
           /* You may add your own implementation here */
           var warningmodal1 = document.getElementById("menu-warning-3");
             warningmodal1.classList.add("menu-active");
-            sendtocontroller(result);
         }
       });
       // customer will be redirected after completing payment pop-up
