@@ -55,6 +55,8 @@ Route::group(['middleware'=>['auth']], function(){
         Route::resource('order', OrderController::class);
         Route::post('order/response', [OrderController::class, 'response'])->name('order.response');
         Route::get('order/midresponse/{id}', [OrderController::class, 'midtrans_response'])->name('order.midresponse');
+        Route::get('order/finresponse', [OrderController::class, 'finishedpayment'])->name('order.finish');
+        Route::get('order/unfinresponse', [OrderController::class, 'unfinishedpayment'])->name('order.unfinish');
 
 
     });

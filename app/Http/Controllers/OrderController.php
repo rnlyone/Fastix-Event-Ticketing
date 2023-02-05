@@ -142,8 +142,18 @@ class OrderController extends Controller
 
     public function midtrans_response($id)
     {
-        $response = json_decode($request->json);
+        $response = json_decode($id);
         dd($response);
+    }
+
+    public function finishedpayment()
+    {
+        return redirect()->route('cust.ticket')->with('sukses', 'Cek Tiket Kamu');
+    }
+
+    public function unfinishedpayment()
+    {
+        return redirect()->route('cust.transaction')->with('gagal', 'gagal');
     }
 
     /**
