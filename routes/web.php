@@ -54,7 +54,7 @@ Route::group(['middleware'=>['auth']], function(){
         Route::resource('cust', CustomerController::class)->except('index');
         Route::resource('order', OrderController::class);
         Route::post('order/response', [OrderController::class, 'response'])->name('order.response');
-        Route::post('order/midresponse', [OrderController::class, 'midtrans_response'])->name('order.midresponse');
+        Route::get('order/midresponse/{id}', [OrderController::class, 'midtrans_response'])->name('order.midresponse');
 
 
     });

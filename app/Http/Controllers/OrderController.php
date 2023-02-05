@@ -140,7 +140,7 @@ class OrderController extends Controller
 
     }
 
-    public function midtrans_response(Request $request)
+    public function midtrans_response($id)
     {
         $response = json_decode($request->json);
         dd($response);
