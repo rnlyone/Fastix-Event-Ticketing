@@ -159,7 +159,7 @@ class OrderController extends Controller
 
             return redirect()->route('cust.ticket')->with('sukses', 'Cek Tiket Kamu');
         } else {
-            return redirect()->route('cust.transaction')->with('gagal', 'gagal '.$statcode);
+            return back()->with('gagal', 'gagal '.$statcode);
         }
     }
 
@@ -182,7 +182,7 @@ class OrderController extends Controller
 
             return redirect()->route('cust.ticket')->with('sukses', 'Cek Tiket Kamu');
         } else {
-            return redirect()->route('cust.transaction')->with('gagal', 'gagal '.$statcode);
+            return back()->with('gagal', 'gagal '.$statcode);
         }
     }
 
@@ -205,7 +205,7 @@ class OrderController extends Controller
 
             return redirect()->route('cust.ticket')->with('sukses', 'Cek Tiket Kamu');
         } else {
-            return redirect()->route('cust.transaction')->with('gagal', 'gagal '.$statcode);
+            return back()->with('gagal', 'gagal '.$statcode);
         }
     }
 
