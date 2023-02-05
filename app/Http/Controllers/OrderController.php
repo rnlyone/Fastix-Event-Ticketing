@@ -122,6 +122,7 @@ class OrderController extends Controller
 
     public function finvoice($uuid)
     {
+        $adminfee = 5500;
         $order = Order::where('uuid', $uuid)->first();
         return view('pwa.cust.trc.trccheckout', [
             'order' => $order,
