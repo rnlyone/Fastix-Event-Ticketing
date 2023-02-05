@@ -125,6 +125,7 @@ class OrderController extends Controller
         $order = Order::where('uuid', $uuid)->first();
         return view('pwa.cust.trc.trccheckout', [
             'order' => $order,
+            'adminfee' => $adminfee,
             'transaksi' => 'active-nav',
         ]);
 
