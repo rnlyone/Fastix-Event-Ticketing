@@ -77,38 +77,41 @@
             @csrf
             <input type="hidden" name="order" value="0">
             <input type="hidden" name="id_event" value="{{$eventdetail->id}}">
-            @foreach ($tickets as $ticket)
-            <div class="list-group list-custom-small">
-                <div class="d-flex mb-3">
-                    <div class="align-self-center pt-1">
-                        @php
-                        $orderdetails = $ticket->orderdetails;
+            <div style="max-height: 300px; overflow-y: auto;">
+                @foreach ($tickets as $ticket)
+                <div class="list-group list-custom-small">
+                    <div class="d-flex mb-3">
+                        <div class="align-self-center pt-1">
+                            @php
+                            $orderdetails = $ticket->orderdetails;
 
-                        $summ = 0;
-                        foreach ($orderdetails as $j => $orderdetail) {
-                            $stat = $orderdetail->order->status_bayar;
+                            $summ = 0;
+                            foreach ($orderdetails as $j => $orderdetail) {
+                                $stat = $orderdetail->order->status_bayar;
 
-                            if($stat == 'sukses'){
-                                $summ = $summ + $orderdetail->jumlah;
+                                if($stat == 'sukses'){
+                                    $summ = $summ + $orderdetail->jumlah;
+                                }
+
                             }
-
-                        }
-                        @endphp
-                        <h6 class="font-500 font-14">{{$ticket->nama_tiket}} ({{$ticket->kuota - $summ}})</h6>
-                        <h5 class="font-700 color-highlight">Rp.{{number_format($ticket->harga)}}.<sup>/pcs</sup></h5>
+                            @endphp
+                            <h6 class="font-500 font-14">{{$ticket->nama_tiket}} ({{$ticket->kuota - $summ}})</h6>
+                            <h5 class="font-700 color-highlight">Rp.{{number_format($ticket->harga)}}.<sup>/pcs</sup></h5>
+                        </div>
+                        <div class="stepper rounded-s align-self-center me-n2 mx-auto float-end">
+                            <a href="#" onclick="setTimeout(updateTotal, 50)" class="stepper-sub"><i
+                                    class="fa fa-minus color-theme opacity-40 mx-auto"></i></a>
+                            <input oninput="updateTotal()" name="{{$ticket->id}}" type="number" min="0"
+                                max="{{$ticket->kuota - $summ}}" value="0">
+                            <a href="#" onclick="setTimeout(updateTotal, 50)" class="stepper-add"><i
+                                    class="fa fa-plus color-theme opacity-40 mx-auto"></i></a>
+                        </div>
                     </div>
-                    <div class="stepper rounded-s align-self-center me-n2 mx-auto float-end">
-                        <a href="#" onclick="setTimeout(updateTotal, 50)" class="stepper-sub"><i
-                                class="fa fa-minus color-theme opacity-40 mx-auto"></i></a>
-                        <input oninput="updateTotal()" name="{{$ticket->id}}" type="number" min="0"
-                            max="{{$ticket->kuota - $summ}}" value="0">
-                        <a href="#" onclick="setTimeout(updateTotal, 50)" class="stepper-add"><i
-                                class="fa fa-plus color-theme opacity-40 mx-auto"></i></a>
-                    </div>
+                    <div class="divider divider-margins mb-3"></div>
                 </div>
-                <div class="divider divider-margins mb-3"></div>
+                @endforeach
             </div>
-            @endforeach
+            <div class="divider divider-margins mt-3 mb-3"></div>
             <div class="d-flex">
                 <div class="pe-4 w-100">
                     <p class="font-600 color-highlight mb-0 font-13">Your Total</p>
