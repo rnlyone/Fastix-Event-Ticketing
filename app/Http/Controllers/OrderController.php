@@ -149,6 +149,8 @@ class OrderController extends Controller
     public function finishedpayment(Request $request)
     {
         $response = $request->response;
+        $statcode = $response['status_code'];
+        $order_id = $response['order_id'];
         dd($response);
         return redirect()->route('cust.ticket')->with('sukses', 'Cek Tiket Kamu');
     }
