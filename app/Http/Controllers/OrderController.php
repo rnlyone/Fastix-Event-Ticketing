@@ -140,24 +140,24 @@ class OrderController extends Controller
 
     }
 
-    public function midtrans_response(Request $request, $id)
+    public function midtrans_response(Request $request)
     {
-        $token = $id;
+        $token = $_GET['id'];
         $response = json_decode($request);
         dd($response);
     }
 
-    public function finishedpayment(Request $request, $id)
+    public function finishedpayment(Request $request)
     {
-        $token = $id;
+        $token = $_GET['id'];
         $response = json_decode($request);
         dd($response);
         return redirect()->route('cust.ticket')->with('sukses', 'Cek Tiket Kamu');
     }
 
-    public function unfinishedpayment(Request $request, $id)
+    public function unfinishedpayment(Request $request)
     {
-        $token = $id;
+        $token = $_GET['id'];
         $response = json_decode($request);
         dd($response);
         return redirect()->route('cust.transaction')->with('gagal', 'gagal');

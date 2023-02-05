@@ -54,9 +54,9 @@ Route::group(['middleware'=>['auth']], function(){
         Route::resource('cust', CustomerController::class)->except('index');
         Route::resource('order', OrderController::class);
         Route::post('order/response', [OrderController::class, 'response'])->name('order.response');
-        Route::post('order/midresponse/{id}', [OrderController::class, 'midtrans_response'])->name('order.midresponse');
-        Route::post('order/finresponse/{id}', [OrderController::class, 'finishedpayment'])->name('order.finish');
-        Route::post('order/unfinresponse/{id}', [OrderController::class, 'unfinishedpayment'])->name('order.unfinish');
+        Route::post('order/midresponse/', [OrderController::class, 'midtrans_response'])->name('order.midresponse');
+        Route::post('order/finresponse/', [OrderController::class, 'finishedpayment'])->name('order.finish');
+        Route::post('order/unfinresponse/', [OrderController::class, 'unfinishedpayment'])->name('order.unfinish');
 
 
     });
