@@ -17,9 +17,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
-
-    Route::post('/midresponse', [OrderController::class, 'midtrans_response'])->name('order.midresponse');
-    Route::post('/finresponse', [OrderController::class, 'finishedpayment'])->name('order.finish');
-    Route::post('/unfinresponse/', [OrderController::class, 'unfinishedpayment'])->name('order.unfinish');
 });
+
+Route::post('/midresponse', [OrderController::class, 'midtrans_response'])->name('order.midresponse');
+Route::post('/finresponse', [OrderController::class, 'finishedpayment'])->name('order.finish');
+Route::post('/unfinresponse', [OrderController::class, 'unfinishedpayment'])->name('order.unfinish');
 
