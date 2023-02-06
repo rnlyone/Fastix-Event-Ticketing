@@ -1,6 +1,6 @@
 @include('pwa.layouts.header', ['title' => ': Profil Saya', 'pagetitle' => 'Profil Saya', 'customcss' => ''])
 <div class="page-content">
-    <div class="card card-style" style="background-image: url('/storage/profile_pict/{{$userdata->profile_pict}}')" data-card-height="450">
+    <div class="card card-style" style="background-image: url('{{Storage::url('/profile_pict/' . $userdata->profile_pict)}}')" data-card-height="450">
         <div class="card-top">
             <form action="{{ route('cust.updatepp') }}" method="post" enctype="multipart/form-data">
                 @csrf
