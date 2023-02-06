@@ -41,6 +41,7 @@ Route::group(['middleware'=>['auth']], function(){
         Route::get('/cust', [CustomerController::class, 'custIndex'])->name('cust');
         Route::get('/cust/profile', [CustomerController::class, 'custProfile'])->name('cust.profile');
         Route::post('/cust/profile/update', [CustomerController::class, 'newupdate'])->name('cust.updateprofile');
+        Route::post('/cust/profile/updateimg', [CustomerController::class, 'newupdateimg'])->name('cust.updatepp');
         Route::get('/cust/ticket', [CustomerController::class, 'custTicket'])->name('cust.ticket');
         Route::get('/cust/scan', [CustomerController::class, 'custScan'])->name('cust.scan');
         Route::get('/cust/event/{uuid}', [CustomerController::class, 'custEvent'])->name('cust.event');

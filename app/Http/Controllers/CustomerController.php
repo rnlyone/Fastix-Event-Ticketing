@@ -11,6 +11,7 @@ use App\Models\Ticket;
 use App\Models\User;
 use DateTime;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Psy\Readline\Hoa\Console;
 
 class CustomerController extends Controller
@@ -192,6 +193,26 @@ class CustomerController extends Controller
         $customer->save();
 
         return back()->with('sukses', 'Berhasil Simpan');
+    }
+
+    public function newupdateimg(Request $request)
+    {
+        // Validate file size and aspect ratio
+        $validatedData = $request->validate([
+            'profile_pict' => 'required|image|dimensions:ratio=1/1|max:2048',
+        ]);
+
+        // If validation passes, store the file
+        $file = $request->file('profile_pict');
+        $fileName = time() . '.' . $file->getClientOriginalExtension();
+        $file->storeAs('public/profile_pict', $fileName);
+
+        // Update the user's profile picture
+        $user = User::find(auth()->user()->id);
+        $user->profile_pict = $fileName;
+        $user->save();
+
+        return redirect()->back()->with('success', 'Foto profile berhasil diperbarui.');
     }
     /**
      * Remove the specified resource from storage.

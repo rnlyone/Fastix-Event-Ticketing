@@ -1,9 +1,19 @@
 @include('pwa.layouts.header', ['title' => ': Profil Saya', 'pagetitle' => 'Profil Saya', 'customcss' => ''])
 <div class="page-content">
-    <div class="card card-style" style="background-image: url('{{$userdata->profile_pict}}')" data-card-height="450">
+    <div class="card card-style" style="background-image: url('/storage/profile_pict/{{$userdata->profile_pict}}')" data-card-height="450">
         <div class="card-top">
-            <a href="#" class="btn btn-s border-white color-white float-end mt-2 me-2 rounded-sm"><i
-                    class="fa fa-camera pe-2"></i>Upload </a>
+            <form action="{{ route('cust.updatepp') }}" method="post" enctype="multipart/form-data">
+                @csrf
+                <a href="#" id="upload-link" class="btn btn-s border-white color-white float-end mt-2 me-2 rounded-sm"><i
+                        class="fa fa-camera pe-2"></i>Upload </a>
+                <input name="profile_pict" onchange="this.form.submit()" type="file" style="display: none;" id="upload-input" accept="image/*">
+            </form>
+            <script>
+                document.getElementById("upload-link").addEventListener("click", function(e) {
+                  e.preventDefault();
+                  document.getElementById("upload-input").click();
+                });
+              </script>
         </div>
         <div class="card-bottom ms-3 me-3">
             <h1 class="font-40 line-height-xl color-white">{{$custdata->nama_lengkap ?? "User"}}</h1>

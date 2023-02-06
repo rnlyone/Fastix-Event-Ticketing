@@ -5,7 +5,7 @@
     <a href="{{route('cust.ticket')}}" class="{{$ticket ?? ''}}"><i class="fa fa-ticket"></i><span>My Ticket</span></a>
 
         @if (Auth::check())
-            <a href="{{route('cust.profile')}}" class="{{$profile ?? ''}}"><img src="{{auth()->user()->profile_pict}}" class="rounded-xl mb-2" width="17"><span>Profil</span></a>
+            <a href="{{route('cust.profile')}}" class="{{$profile ?? ''}}"><img src="/storage/profile_pict/{{auth()->user()->profile_pict}}" class="rounded-xl mb-2" width="17"><span>Profil</span></a>
         @else
             <a href="{{route('flogin')}}" class="{{$login ?? ''}}"><i class="fa fa-user"></i><span>Masuk</span></a>
         @endif
