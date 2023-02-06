@@ -25,7 +25,7 @@
                 @csrf
             <div class="mt-5 mb-3">
                 <div class="input-style has-borders no-icon input-style-always-active validate-field mb-4">
-                    <input type="text" name="nama_lengkap" class="form-control validate-name" id="form1" placeholder="{{$custdata->nama_lengkap ?? ""}}" required>
+                    <input type="text" name="nama_lengkap" class="form-control validate-name" id="form1" placeholder="{{$custdata->nama_lengkap ?? ""}}" value="{{$custdata->nama_lengkap ?? ""}}" required>
                     <label for="form1" class="color-highlight">Nama Lengkap</label>
                     <i class="fa fa-times disabled invalid color-red-dark"></i>
                     <i class="fa fa-check disabled valid color-green-dark"></i>
