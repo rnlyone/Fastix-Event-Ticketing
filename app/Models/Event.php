@@ -41,7 +41,7 @@ class Event extends Model
         return $this->belongsTo(EO::class, 'id_eo');
     }
 
-    public function tickets()
+    public function tickets() 
     {
         return $this->hasMany(Ticket::class, 'id_event');
     }

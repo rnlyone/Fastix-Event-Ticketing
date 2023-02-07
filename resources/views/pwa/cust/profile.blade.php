@@ -14,6 +14,22 @@
                   document.getElementById("upload-input").click();
                 });
               </script>
+              <script>
+                document.getElementById("upload-link").addEventListener("click", function(e) {
+                  e.preventDefault();
+                  document.getElementById("upload-input").click();
+                });
+
+                var backgroundColor = window.getComputedStyle(document.querySelector(".card-style")).getPropertyValue("background-color");
+
+                if (backgroundColor === "rgb(255, 255, 255)") {
+                  document.querySelector("#upload-link").classList.add("color-black");
+                  document.querySelector("#upload-link").classList.add("border-black");
+                } else {
+                  document.querySelector("#upload-link").classList.remove("color-black");
+                  document.querySelector("#upload-link").classList.remove("border-black");
+                }
+              </script>
         </div>
         <div class="card-bottom ms-3 me-3">
             <h1 class="font-40 line-height-xl color-white">{{$custdata->nama_lengkap ?? "User"}}</h1>
