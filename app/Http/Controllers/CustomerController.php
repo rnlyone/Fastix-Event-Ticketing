@@ -18,7 +18,7 @@ class CustomerController extends Controller
 {
     public function custIndex()
     {
-        $riwayatscan = Riwayat::where('id_cust', auth()->user()->id)
+        $riwayatscan = Riwayat::where('id_cust', auth()->user()->id)->latest()
         ->whereHas('event', function($query){
           $query->where('visibility', 1);
         })
