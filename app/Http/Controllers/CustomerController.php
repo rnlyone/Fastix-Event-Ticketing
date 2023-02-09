@@ -86,6 +86,17 @@ class CustomerController extends Controller
             return back()->with('gagal', 'Event Tidak Ada');
         }
 
+        $riwayat = Riwayat::where('id_cust', Auth::guard('cust')->user()->id)
+                            ->where('id_event', $event->id)->first();
+        if (!$riwayat) {
+            // add to riwayat if not exists
+            $riwayat = new Riwayat();
+            $riwayat->id_cust = Auth::guard('cust')->user()->id;
+            $riwayat->id_event = $event->id;
+            $riwayat->save();
+        }
+
+
     }
 
     public function custEvent($uuid)
