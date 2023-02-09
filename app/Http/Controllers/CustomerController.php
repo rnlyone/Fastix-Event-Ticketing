@@ -21,7 +21,7 @@ class CustomerController extends Controller
         $riwayatscan = Riwayat::where('id_cust', auth()->user()->id)
         ->whereHas('event', function($query){
           $query->where('visibility', 1);
-        })->latest()
+        })->orderBy('created_at', 'desc')
         ->get();
 
         return view('pwa.cust.welcome', ['riwayat' => 'active-nav', 'riwayatscan' => $riwayatscan]);
