@@ -7,6 +7,17 @@ use Illuminate\Http\Request;
 
 class EOController extends Controller
 {
+    public function EOIndex()
+    {
+        #page information
+        $pagetitle = 'Dashboard';
+        $breadcrumb = [['Dashboard', route('EO')]];
+        return view('EO.welcome', [
+            'pagetitle' => $pagetitle,
+            'breadcrumb' => $breadcrumb
+        ]);
+    }
+
     /**
      * Display a listing of the resource.
      *

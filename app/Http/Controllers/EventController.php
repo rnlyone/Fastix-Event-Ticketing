@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
+use App\Models\Ticket;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class EventController extends Controller
 {
@@ -14,7 +17,37 @@ class EventController extends Controller
      */
     public function index()
     {
-        //
+        #page information
+        $pagetitle = 'Event Saya';
+        $breadcrumb = [['Event Saya', route('event.index')]];
+
+        $events = Event::where('id_eo', auth()->user()->id)->get();
+        return view('EO.events.index', [
+            'events' => $events,
+            'pagetitle' => $pagetitle,
+            'breadcrumb' => $breadcrumb
+        ]);
+    }
+
+    public function EOEvent($uuid)
+    {
+        #page information
+        $pagetitle = 'Detail Event';
+
+
+        $event = Event::where('uuid', $uuid)->first();
+
+        $tickets = Ticket::where('id_event', $event->id)->get();
+
+        $breadcrumb = [['Event Saya', route('event.index')], [$event->nama_event, route('event.detail', [$uuid])]];
+
+        return view('EO.events.details', [
+            'pagetitle' => $pagetitle,
+            'breadcrumb' => $breadcrumb,
+            'scan' => 'active-nav',
+            'eventdetail' => $event,
+            'tickets' => $tickets,
+        ]);
     }
 
     /**
@@ -70,6 +103,67 @@ class EventController extends Controller
     public function update(Request $request, Event $event)
     {
         //
+    }
+
+    public function newupdate(Request $request, $uuid)
+    {
+        $id = Event::where('uuid', $uuid)->first()->id;
+        $event = Event::findOrFail($id);
+
+        // validasi input
+        $validator = Validator::make($request->all(), [
+            'nama_event' => 'required',
+            'lokasi' => 'required',
+            'max_buy' => 'required|numeric',
+            'buka_regis' => 'required',
+            'tutup_regis' => 'required',
+            'mulai_event' => 'required',
+            'selesai_event' => 'required',
+            'img_url' => 'mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        // validasi tanggal
+        $validator->after(function ($validator) use ($request) {
+            $buka_regis = strtotime($request->buka_regis);
+            $tutup_regis = strtotime($request->tutup_regis);
+            $mulai_event = strtotime($request->mulai_event);
+            $selesai_event = strtotime($request->selesai_event);
+
+            if ($buka_regis >= $tutup_regis) {
+                $validator->errors()->add('buka_regis', 'Buka registrasi harus sebelum tutup registrasi');
+            }
+            if ($tutup_regis >= $mulai_event) {
+                $validator->errors()->add('tutup_regis', 'Tutup registrasi harus sebelum mulai event');
+            }
+            if ($mulai_event >= $selesai_event) {
+                $validator->errors()->add('mulai_event', 'Mulai event harus sebelum selesai event');
+            }
+        });
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        }
+
+        $event = Event::where('uuid', $uuid)->first();
+        $event->nama_event = $request->nama_event;
+        $event->lokasi = $request->lokasi;
+        $event->max_buy = $request->max_buy;
+        $event->buka_regis = $request->buka_regis;
+        $event->tutup_regis = $request->tutup_regis;
+        $event->mulai_event = $request->mulai_event;
+        $event->selesai_event = $request->selesai_event;
+        $event->visibility = $request->visibility;
+
+        if ($request->hasFile('img_url')) {
+            $image = $request->file('img_url');
+            $name = time().'.'.$image->getClientOriginalExtension();
+            $image->storeAs('public/img_url_event', $name);
+            $event->img_url = $name;
+        }
+
+        $event->save();
+
+        return redirect()->route('event.detail', ['uuid' => $event->uuid])->with('sukses', 'Data event berhasil diupdate.');
     }
 
     /**

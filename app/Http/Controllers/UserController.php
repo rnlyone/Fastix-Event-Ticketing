@@ -36,18 +36,36 @@ class UserController extends Controller
         }
 
         Auth::login($user);
+        $agent = new Agent();
 
         if ($user->role === 'cust') {
-            return redirect()->route('cust');
+
+            if ($agent->isMobile()) {
+                return redirect()->route('cust');
+            } else {
+                    return redirect()->route('logout')->with('gagal', 'Akun Tersebut adalah Akun Customer, Login di Mobile');
+            }
+
         } else if ($user->role === 'EO') {
-            return redirect()->route('dashboard');
+            return redirect()->route('EO');
         }
     }
 
     public function logout()
     {
         Auth::logout();
-        return redirect('/');
+
+        if(session()->get('gagal')){
+            $getflash = session('gagal') ;
+        } else {
+            $getflash = NULL;
+        }
+        // dd($getflash);
+        if ($getflash != NULL){
+            return redirect('/login')->with('gagal', $getflash);
+        }else{
+            return redirect('/login');
+        }
     }
 
 

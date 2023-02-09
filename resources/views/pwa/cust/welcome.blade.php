@@ -23,7 +23,7 @@
             </div> --}}
             @foreach ($riwayatscan as $rs)
                 <div class="card card-style">
-                    <div class="card mb-0 rounded-0" style="background-image : url({{$rs->event->img_url}})" data-card-height="250">
+                    <div class="card mb-0 rounded-0" style="background-image : url({{Storage::url('/img_url_event/' . $rs->event->img_url)}})" data-card-height="250">
                         <div class="card-bottom">
                             <a href="{{route('cust.event', ['uuid' => $rs->event->uuid])}}"
                                 class="float-end btn btn-m font-700 bg-white rounded-s color-black mb-2 me-2">Detail Event</a>

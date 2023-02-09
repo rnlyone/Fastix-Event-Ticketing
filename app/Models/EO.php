@@ -20,9 +20,4 @@ class EO extends Model
     {
         return $this->belongsTo(User::class, 'id_user');
     }
-
-    public function events()
-    {
-        return $this->hasMany(Event::class, 'id_eo');
-    }
 }

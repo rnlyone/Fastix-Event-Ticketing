@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\EOController;
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
@@ -58,6 +60,17 @@ Route::group(['middleware'=>['auth']], function(){
         Route::resource('cust', CustomerController::class)->except('index');
         Route::resource('order', OrderController::class);
         Route::post('order/response', [OrderController::class, 'response'])->name('order.response');
+
+
+    });
+
+    Route::middleware(['role:EO'])->group(function () {
+        Route::get('/dashboard', [EOController::class, 'EOIndex'])->name('EO');
+
+        Route::resource('/event', EventController::class)->except('update');
+
+        Route::get('/event/details/{uuid}', [EventController::class, 'EOEvent'])->name('event.detail');
+        Route::post('/event/details/{uuid}/update', [EventController::class, 'newupdate'])->name('event.update');
 
 
     });

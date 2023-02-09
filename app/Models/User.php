@@ -62,6 +62,11 @@ class User extends Authenticatable
         return $this->hasMany(Order::class, 'id_cust');
     }
 
+    public function events()
+    {
+        return $this->hasMany(Event::class, 'id_eo');
+    }
+
     public function order_details()
     {
         return $this->hasMany(OrderDetail::class, 'id_cust');

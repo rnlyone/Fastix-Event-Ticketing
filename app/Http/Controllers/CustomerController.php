@@ -18,7 +18,11 @@ class CustomerController extends Controller
 {
     public function custIndex()
     {
-        $riwayatscan = Riwayat::where('id_cust', auth()->user()->id)->get();
+        $riwayatscan = Riwayat::where('id_cust', auth()->user()->id)
+        ->whereHas('event', function($query){
+          $query->where('visibility', 1);
+        })
+        ->get();
 
         return view('pwa.cust.welcome', ['riwayat' => 'active-nav', 'riwayatscan' => $riwayatscan]);
     }
@@ -74,7 +78,7 @@ class CustomerController extends Controller
 
     public function scan(Request $request)
     {
-        $event = Event::where('uuid', $request->id_event)->first();
+        $event = Event::where('uuid', $request->id_event)->where('visibility', 1)->first();
 
         if ($event != NULL) {
             return redirect()->route('cust.event', ['uuid' => $event->uuid]);

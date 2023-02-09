@@ -1,9 +1,14 @@
 @include('pwa.layouts.header', ['title' => ': Detail Event', 'pagetitle' => 'Event Detail', 'customcss' => ''])
 <div class="page-content">
-    <div class="card card-style">
-        <div class="card mb-0 rounded-0" style="background-image : url({{$eventdetail->img_url}})"
-            data-card-height="250">
+    <a href="{{Storage::url('/img_url_event/' . $eventdetail->img_url)}}"
+        data-gallery="gallery-1" class="default-link card card-style"
+        style="background-image : url({{Storage::url('/img_url_event/' . $eventdetail->img_url)}});"
+        data-card-height="450" title="Screaming Music">
+        <div class="card-top">
+            <span class="btn btn-m bg-red-dark rounded-sm font-700 scale-box float-end mt-2 me-2">Klik Untuk Lihat Full</span>
         </div>
+        </a>
+    <div class="card card-style">
         <div class="content">
             @php
                 setlocale(LC_TIME, 'id_ID.utf8');
@@ -42,7 +47,7 @@
         </div>
     </div>
     <div class="card card-style shadow-0 mb-4">
-        <button class="btn accordion-btn color-white no-effect collapsed" data-bs-toggle="collapse"
+        <button class="btn accordion-btn color-black no-effect collapsed" data-bs-toggle="collapse"
             data-bs-target="#collapse4" aria-expanded="false">
             <i class="fa fa-heart me-2"></i>
             Deskripsi Event
@@ -102,7 +107,7 @@
                             <a href="#" onclick="setTimeout(updateTotal, 50)" class="stepper-sub"><i
                                     class="fa fa-minus color-theme opacity-40 mx-auto"></i></a>
                             <input oninput="updateTotal()" name="{{$ticket->id}}" type="number" min="0"
-                                max="{{$ticket->kuota - $summ}}" value="0">
+                                max="{{$ticket->event->max_buy}}" value="0">
                             <a href="#" onclick="setTimeout(updateTotal, 50)" class="stepper-add"><i
                                     class="fa fa-plus color-theme opacity-40 mx-auto"></i></a>
                         </div>
