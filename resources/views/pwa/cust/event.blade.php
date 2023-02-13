@@ -179,5 +179,8 @@
   </script>
 
 
+    @include('pwa.layouts.toaster')
+
+
 
 @include('pwa.layouts.footer')

@@ -32,10 +32,10 @@
               </script>
         </div>
         <div class="card-bottom ms-3 me-3">
-            <h1 class="font-40 line-height-xl color-white">{{$custdata->nama_lengkap ?? "User"}}</h1>
+            <h1 class="font-40 line-height-xl color-white">{{$custdata->nama_lengkap ?? auth()->user()->username}}</h1>
             <p class="color-white opacity-60"><i class="fa fa-map-marker me-2"></i>Fastix User</p>
             <p class="color-white opacity-80 font-15">
-                {{$custdata->nama_lengkap ?? "User"}} sedang menggunakan aplikasi Fastix untuk membeli tiket event. Aplikasi ini memudahkan user untuk membeli tiket dengan cepat dan mudah.
+                {{$custdata->nama_lengkap ?? auth()->user()->username}} sedang menggunakan aplikasi Fastix untuk membeli tiket event. Aplikasi ini memudahkan user untuk membeli tiket dengan cepat dan mudah.
             </p>
         </div>
         <div class="card-overlay bg-gradient"></div>

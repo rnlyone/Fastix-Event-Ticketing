@@ -19,4 +19,9 @@ class Paidtix extends Model
     {
         return $this->belongsTo(OrderDetail::class, 'id_detail');
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'id_cust', 'id');
+    }
 }

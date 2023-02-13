@@ -28,7 +28,7 @@
             @foreach ($order->details as $detail)
             <div class="d-flex mb-3">
                 <div>
-                    <img src="{{$detail->ticket->event->img_url}}" style="
+                    <img src="{{Storage::url('/img_url_event/' . $detail->ticket->event->img_url)}}" style="
                         border-radius: 12px;
                         height: 32px !important;
                         line-height: 32px !important;
@@ -65,6 +65,16 @@
                 Sekarang</a>
                 <p class="text-center font-11 opacity-50 mb-0">Jangan me-refresh halaman</p>
         </div>
+        <form action="{{route('order.destroy', $order->id)}}" method="POST">
+            @csrf
+            @method('DELETE')
+            <a href="#" onclick="
+                if (confirm('Apakah Anda yakin ingin membatalkan pesanan ini?')) {
+                    this.parentNode.submit();
+                }
+                return false;
+            "><p class="text-center font-13 opacity-50 text-danger mb-3">Batalkan Pesanan</p></a>
+        </form>
     </div>
 </div>
 

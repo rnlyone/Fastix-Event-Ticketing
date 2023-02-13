@@ -4,6 +4,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\EOController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\TicketController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -36,6 +37,8 @@ Route::get('/', function () {
 Route::group(['middleware'=>['guest']], function(){
     Route::get('/login', [UserController::class, 'flogin'])->name('flogin');
     Route::post('/login', [UserController::class, 'login'])->name('login');
+    Route::get('/register', [UserController::class, 'fregister'])->name('fregister');
+    Route::post('/register', [UserController::class, 'register'])->name('register');
 });
 
 Route::group(['middleware'=>['auth']], function(){
@@ -61,17 +64,23 @@ Route::group(['middleware'=>['auth']], function(){
         Route::resource('order', OrderController::class);
         Route::post('order/response', [OrderController::class, 'response'])->name('order.response');
 
-
     });
 
     Route::middleware(['role:EO'])->group(function () {
         Route::get('/dashboard', [EOController::class, 'EOIndex'])->name('EO');
 
-        Route::resource('/event', EventController::class)->except('update');
+        Route::resource('/event', EventController::class)->except('update', 'store');
+
 
         Route::get('/event/details/{uuid}', [EventController::class, 'EOEvent'])->name('event.detail');
         Route::post('/event/details/{uuid}/update', [EventController::class, 'newupdate'])->name('event.update');
+        Route::post('/event/store', [EventController::class, 'store'])->name('event.store');
+        Route::get('/event/attend/{uuid}', [EventController::class, 'EOattend'])->name('event.attend');
+        Route::post('/event/scan', [EventController::class, 'EOscan'])->name('event.scan');
 
+        Route::resource('/ticket', TicketController::class)->except('update', 'store');
+        Route::post('/ticket/{uuidtix}', [TicketController::class, 'newupdate'])->name('ticket.update');
+        Route::post('/ticket/store/{uuid}', [TicketController::class, 'store'])->name('ticket.store');
 
     });
 

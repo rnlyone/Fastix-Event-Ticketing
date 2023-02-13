@@ -22,6 +22,32 @@ class UserController extends Controller
 
     }
 
+    public function fregister()
+    {
+        $agent = new Agent();
+
+        if ($agent->isMobile()) {
+                return view('pwa.cust.register', ['login' => 'active-nav']);
+        } else {
+                return view('EO.register');
+        }
+
+    }
+
+    public function register(Request $request)
+    {
+        $validatedData = $request->validate([
+            'username' => 'required',
+            'no_hp' => 'required|numeric',
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+
+        $newuser = User::create(array_merge($validatedData, ['role' => 'cust']));
+
+        Auth::login($newuser);
+    }
+
     public function login(Request $request)
     {
         $validatedData = $request->validate([

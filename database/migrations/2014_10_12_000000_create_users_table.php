@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('email_verified_at')->nullable();
             $table->string('no_hp');
             $table->string('password');
-            $table->text('profile_pict');
+            $table->text('profile_pict')->default('default.png');
             $table->timestamps();
         });
     }

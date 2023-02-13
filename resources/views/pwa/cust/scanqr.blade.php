@@ -16,12 +16,15 @@
             </p>
             <div class="divider"></div>
             <p id="scanned-result"></p>
+            <div id="selector" class="mx-auto"></div>
             <video id="scanner" allow="camera" style="width: 100%; height:100%; margin:auto"></video>
         </div>
         <script src="https://code.jquery.com/jquery-3.6.3.min.js"
             integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
         <script src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
         <script>
+
+            let scanner;
 
             // Meminta izin pengguna untuk menggunakan kamera
             if (navigator.mediaDevices === undefined) {
@@ -42,12 +45,20 @@
                 }
             }
 
+
+
+            function changeCamera(index) {
+                        Instascan.Camera.getCameras().then(function (cameras) {
+                            scanner.start(cameras[index]);
+                        });
+                    }
+
             navigator.mediaDevices.getUserMedia({
                     video: { facingMode: { exact: "environment" } },
                     mirror:false
                 })
                 .then(function (stream) {
-                    var scanner = new Instascan.Scanner({
+                    scanner = new Instascan.Scanner({
                         video: document.getElementById('scanner')
                     });
 
@@ -88,12 +99,25 @@
 
 
                     Instascan.Camera.getCameras().then(function (cameras) {
-                        if (cameras.length > 1) {
-                            scanner.start(cameras[1]);
-                        } else if (cameras.length > 0) {
-                            scanner.start(cameras[0]);
+                        if (cameras.length > 0) {
+                            for (var i = 0; i < cameras.length; i++) {
+                                var camera = cameras[i];
+                                var radio = document.createElement("input");
+                                radio.setAttribute("type", "radio");
+                                radio.setAttribute("name", "camera");
+                                radio.setAttribute("value", i);
+                                radio.setAttribute("onclick", "changeCamera(this.value)");
+                                if (i === 0) {
+                                    radio.setAttribute("checked", "checked");
+                                }
+
+                                var label = document.createElement("label");
+                                label.appendChild(radio);
+                                label.innerHTML += "Kamera " + (i + 1);
+                                document.getElementById("selector").appendChild(label);
+                            }
                         } else {
-                            console.error('No cameras found.');
+                            console.error("No cameras found.");
                         }
                     });
                 })

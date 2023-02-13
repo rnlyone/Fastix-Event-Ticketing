@@ -28,8 +28,6 @@
         @include('pwa.layouts.navigator')
         <div class="page-title page-title-fixed">
             <h1>{{$pagetitle}}</h1>
-            <a href="#" class="page-title-icon shadow-xl bg-theme color-theme"><i
-                    class="fa fa-shopping-cart"></i></a>
             <a href="#" class="page-title-icon shadow-xl bg-theme color-theme show-on-theme-light" data-toggle-theme><i
                     class="fa fa-moon"></i></a>
             <a href="#" class="page-title-icon shadow-xl bg-theme color-theme show-on-theme-dark" data-toggle-theme><i

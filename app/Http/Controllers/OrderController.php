@@ -22,6 +22,7 @@ class OrderController extends Controller
         }
         $sum = $sum + $adminfee;
 
+        $cartcounter = $event->tickets->count();
         try {
             $neworder = Order::create([
                 'uuid' => Str::random(45),
@@ -46,9 +47,17 @@ class OrderController extends Controller
                             'status_tiket' => 0
                         ]);
                     }
+                }else{
+                    $cartcounter = $cartcounter-1;
                 }
 
             }
+
+            if($cartcounter == 0){
+                $neworder->delete();
+                return back()->with('gagal', 'Tidak ada Pesanan');
+            }
+
             return redirect()->route('cust.checkout', ['uuid' => $neworder->uuid]);
         } catch (Exception $e) {
             dd($e);
@@ -74,8 +83,8 @@ class OrderController extends Controller
         // Set 3DS transaction for credit card to true
         \Midtrans\Config::$is3ds = true;
 
-        $firstname = explode(" ", auth()->user()->customer->nama_lengkap ?? "User_".auth()->user()->id)[0];
-        $lastname = explode(" ", auth()->user()->customer->nama_lengkap ?? "")[1] ?? "";
+        $firstname = explode(" ", auth()->user()->customer->nama_lengkap ?? auth()->user()->username)[0];
+        $lastname = explode(" ", auth()->user()->customer->nama_lengkap ?? auth()->user()->username)[1] ?? "";
 
 
         $detailorder = $order->details;
@@ -228,7 +237,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        return dd('ini');
     }
 
     /**
@@ -294,6 +303,18 @@ class OrderController extends Controller
      */
     public function destroy(Order $order)
     {
-        //
+        try {
+            foreach ($order->details as $i => $detail) {
+                foreach($detail->paidtix as $p => $tix){
+                    $tix->delete();
+                }
+            }
+            $order->status_bayar = "gagal";
+            $order->save();
+        } catch (\Throwable $th) {
+            dd($th);
+        }
+
+        return redirect()->route('cust.transaction')->with('sukses', 'sukses dihapus');
     }
 }

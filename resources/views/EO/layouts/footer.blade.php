@@ -55,6 +55,13 @@
     <script src={{asset("/assets/js/datepicker/date-picker/datepicker.js")}}></script>
     <script src={{asset("/assets/js/datepicker/date-picker/datepicker.en.js")}}></script>
     <script src={{asset("/assets/js/datepicker/date-picker/datepicker.custom.js")}}></script>
+    @if ($pagetitle == 'Attendance Event')
+        <!-- Plugins JS start-->
+        <script src="/assets/js/datatable/datatables/jquery.dataTables.min.js"></script>
+        <script src="/assets/js/datatable/datatables/datatable.custom.js"></script>
+        <script src="/assets/js/tooltip-init.js"></script>
+        <!-- Plugins JS Ends-->
+    @endif
     <!-- Plugins JS Ends-->
     <!-- Theme js-->
     <script src={{asset("/assets/js/script.js")}}></script>

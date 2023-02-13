@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
+use App\Models\Paidtix;
 use App\Models\Ticket;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Str;
 
 class EventController extends Controller
 {
@@ -21,7 +23,7 @@ class EventController extends Controller
         $pagetitle = 'Event Saya';
         $breadcrumb = [['Event Saya', route('event.index')]];
 
-        $events = Event::where('id_eo', auth()->user()->id)->get();
+        $events = Event::where('id_eo', auth()->user()->id)->where('soft_delete', 0)->get();
         return view('EO.events.index', [
             'events' => $events,
             'pagetitle' => $pagetitle,
@@ -50,14 +52,61 @@ class EventController extends Controller
         ]);
     }
 
+    public function EOattend($uuid)
+    {
+        $tix = session()->get('tix') ?? NULL;
+        #page information
+        $pagetitle = 'Attendance Event';
+        $event = Event::where('uuid', $uuid)->first();
+
+        $breadcrumb = [
+            ['Event Saya', route('event.index')],
+            [$event->nama_event, route('event.detail', [$uuid])],
+            ['Attendance', route('event.attend', [$uuid])]
+        ];
+
+        $event = Event::where('uuid', $uuid)->first();
+        $paidtix = Paidtix::get();
+        $paidtix = $paidtix->filter(function ($item) use ($event) {
+        return $item->orderdetail->ticket->id_event == $event->id;
+        });
+
+
+        return view('EO.events.tickets.scantix', [
+            'pagetitle' => $pagetitle,
+            'breadcrumb' => $breadcrumb,
+            'scan' => 'active-nav',
+            'eventdetail' => $event,
+            'paidtixes' => $paidtix,
+            'tix' => $tix
+        ]);
+    }
+
+    public function EOscan(Request $request)
+    {
+
+        try {
+            $tix = Paidtix::where('token', $request->id_token)->first();
+
+                if($tix->status_tiket == 0){
+                    $tix->status_tiket = 1;
+                    $tix->save();
+                    return redirect()->route('event.attend',['uuid' => $tix->orderdetail->ticket->event->uuid])->with(['tix' => $tix, 'sukses' => 'Tiket Sukses Digunakan']);
+                }else{
+                    return redirect()->route('event.attend',['uuid' => $tix->orderdetail->ticket->event->uuid])->with(['tix' => $tix, 'gagal' => 'tiket Sudah Digunakan Sebelumnya']);
+            }
+        } catch (\Throwable $th) {
+            return redirect()->back()->with(['tix' => $tix, 'gagal' => 'Tiket Tidak Ada']);
+        }
+    }
+
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
     }
 
     /**
@@ -68,7 +117,65 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'nama_event' => 'required',
+            'lokasi' => 'required',
+            'max_buy' => 'required|numeric',
+            'buka_regis' => 'required',
+            'tutup_regis' => 'required',
+            'mulai_event' => 'required',
+            'selesai_event' => 'required',
+            'img_url' => 'mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        // validasi tanggal
+        $validator->after(function ($validator) use ($request) {
+            $buka_regis = strtotime($request->buka_regis);
+            $tutup_regis = strtotime($request->tutup_regis);
+            $mulai_event = strtotime($request->mulai_event);
+            $selesai_event = strtotime($request->selesai_event);
+
+            if ($buka_regis >= $tutup_regis) {
+                $validator->errors()->add('buka_regis', 'Buka registrasi harus sebelum tutup registrasi');
+            }
+            if ($tutup_regis >= $mulai_event) {
+                $validator->errors()->add('tutup_regis', 'Tutup registrasi harus sebelum mulai event');
+            }
+            if ($mulai_event >= $selesai_event) {
+                $validator->errors()->add('mulai_event', 'Mulai event harus sebelum selesai event');
+            }
+        });
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        }
+
+        $event = new Event;
+        $event->uuid = Str::uuid();
+        $event->id_eo = auth()->user()->id;
+        $event->nama_event = $request->nama_event;
+        $event->sinopsis = $request->sinopsis;
+        $event->deskripsi = $request->deskripsi;
+        $event->lokasi = $request->lokasi;
+        $event->max_buy = $request->max_buy;
+        $event->buka_regis = $request->buka_regis;
+        $event->tutup_regis = $request->tutup_regis;
+        $event->mulai_event = $request->mulai_event;
+        $event->selesai_event = $request->selesai_event;
+        $event->visibility = $request->visibility;
+        $event->soft_delete = 0;
+
+        if ($request->hasFile('img_url')) {
+            $image = $request->file('img_url');
+            $name = time().'.'.$image->getClientOriginalExtension();
+            $image->storeAs('public/img_url_event', $name);
+            $event->img_url = $name;
+        }
+
+        $event->save();
+
+        return redirect()->route('event.detail', ['uuid' => $event->uuid])->with('sukses', 'Data event berhasil diupdate.');
+
     }
 
     /**
@@ -174,6 +281,8 @@ class EventController extends Controller
      */
     public function destroy(Event $event)
     {
-        //
+        $event->visibility = 0;
+        $event->soft_delete = 1;
+        $event->save();
     }
 }

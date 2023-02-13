@@ -34,14 +34,14 @@
                     <em>(required)</em>
                 </div>
                 <button type="submit"
-                    class="btn btn-full btn-l font-600 font-13 gradient-highlight mt-4 rounded-s">Sign In</button>
+                    class="btn btn-full btn-l font-600 font-13 gradient-highlight mt-4 rounded-s">Login</button>
             </form>
             <div class="row pt-3 mb-3">
                 <div class="col-6 text-start">
-                    <a href="page-system-forgot-1.html" class="color-highlight">Forgot Password?</a>
+                    <a href="page-system-forgot-1.html" class="color-highlight">Lupa Password?</a>
                 </div>
                 <div class="col-6 text-end">
-                    <a href="page-system-signup-1.html" class="color-highlight">Create Account</a>
+                    <a href="{{route('fregister')}}" class="color-highlight">Buat Akun Baru</a>
                 </div>
             </div>
         </div>

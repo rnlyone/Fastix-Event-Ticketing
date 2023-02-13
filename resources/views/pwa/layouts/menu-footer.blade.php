@@ -1,7 +1,7 @@
 <div class="card card-style">
     <h4 class="font-28 text-center color-theme font-800 pt-3 mt-3">Fastix</h4>
     <p class="boxed-text-l mb-4">
-        Built to match the design trends and give your page the awesome facelift it deserves.
+        Solusi Tepat, Tiket Cepat.
     </p>
     <div class="text-center mb-4">
         <a href="#" class="icon icon-xs rounded-sm shadow-l mr-1 bg-facebook"><i class="fab fa-facebook-f"></i></a>

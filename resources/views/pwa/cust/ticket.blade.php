@@ -31,7 +31,7 @@
             // Tanggal dengan format "15th"
             $date = $createdAt->format('jS');
         @endphp
-        <a href="{{route('cust.detailticket', ['order' => $tix->order->uuid, 'detail' => $tix->id])}}" class="card card-style s card-full-left bg-17" data-card-height="230">
+        <a href="{{route('cust.detailticket', ['order' => $tix->order->uuid, 'detail' => $tix->id])}}" class="card card-style s card-full-left" style="background-image: url({{Storage::url('img_url_event/' . $tix->ticket->event->img_url)}}); height: 230px">
             <div class="card rounded-0 shadow-xl" data-card-height="cover" style="width:100px; z-index:99;">
                 <div class="card-center text-center">
                     <h1 class="font-30 text-uppercase font-900 opacity-30">{{$day}}</h1>

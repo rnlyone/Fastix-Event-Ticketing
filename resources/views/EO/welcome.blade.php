@@ -38,7 +38,7 @@
                                         <div class="card-body text-center p-t-0">
                                             <h3 class="font-light">Wellcome Back, {{auth()->user()->username}}!!</h3>
                                             <p>Selamat datang di dashboard FASTIX, solusi mudah dan cepat untuk pembelian tiket online.</p>
-                                            <button class="btn btn-light">Lihat Event Saya</button>
+                                            <button class="btn btn-light" onclick="window.location.href='{{ route('event.index') }}'">Lihat Event Saya</button>
                                         </div>
                                         <div class="confetti">
                                             <div class="confetti-piece"></div>

@@ -15,55 +15,8 @@
                 <!-- Bookmark Start-->
                 <div class="bookmark">
                     <ul>
-                        <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover"
-                                data-placement="top" title="" data-original-title="Tables"><svg
-                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" class="feather feather-inbox">
-                                    <polyline points="22 12 16 12 14 15 10 15 8 12 2 12"></polyline>
-                                    <path
-                                        d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z">
-                                    </path>
-                                </svg></a></li>
-                        <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover"
-                                data-placement="top" title="" data-original-title="Chat"><svg
-                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" class="feather feather-message-square">
-                                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-                                </svg></a></li>
-                        <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover"
-                                data-placement="top" title="" data-original-title="Icons"><svg
-                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" class="feather feather-command">
-                                    <path
-                                        d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3H6a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 3 3 0 0 0-3-3z">
-                                    </path>
-                                </svg></a></li>
-                        <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover"
-                                data-placement="top" title="" data-original-title="Learning"><svg
-                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" class="feather feather-layers">
-                                    <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
-                                    <polyline points="2 17 12 22 22 17"></polyline>
-                                    <polyline points="2 12 12 17 22 12"></polyline>
-                                </svg></a></li>
-                        <li><a href="javascript:void(0)"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                    stroke-linecap="round" stroke-linejoin="round"
-                                    class="feather feather-star bookmark-search">
-                                    <polygon
-                                        points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
-                                    </polygon>
-                                </svg></a>
-                            <form class="form-inline search-form">
-                                <div class="form-group form-control-search">
-                                    <input type="text" placeholder="Search..">
-                                </div>
-                            </form>
-                        </li>
+                        <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="modal" data-original-title="test" data-bs-target="#newevent"
+                                data-placement="top" title="" data-original-title="Learning"><i data-feather="plus"></i></a></li>
                     </ul>
                 </div>
                 <!-- Bookmark Ends-->
@@ -74,6 +27,7 @@
 
 <div class="col-sm-12">
     <div class="card">
+        @include('EO.layouts.flasher')
         <div class="card-header">
             <h5>Tabel Event</h5><span>Berikut Event yang kamu Selenggarakan.</span>
         </div>
@@ -102,15 +56,149 @@
                             <span class="badge badge-success">Terlihat</span>
                             @endif</td>
                         <td>
-                            <a class="btn btn-primary" href="{{route('event.detail', [$event->uuid])}}"><i
-                                    data-feather="edit"></i></a>
-                            <button class="btn btn-danger" type="button"><i data-feather="trash-2"></i></button>
+                            <div style="display: flex; justify-content: center;">
+                                <button class="btn btn-primary px-3" style="width: 50px; height: 50px;" onclick="location.href='{{route('event.detail', [$event->uuid])}}'">
+                                    <i data-feather="edit" style="margin: 0; display: flex; align-items: center;"></i>
+                                </button>
+                                <form action="{{ route('event.destroy', $event->id) }}" method="post">
+                                    @csrf
+                                    @method('delete')
+                                    <button class="btn btn-danger px-3" type="submit" style="width: 50px; height: 50px;" onclick="return confirm('Are you sure you want to delete this event?');">
+                                        <i style="margin: 0; display: flex; align-items: center;" data-feather="trash-2"></i>
+                                    </button>
+                                </form>
+                            </div>
                         </td>
+
                     </tr>
                     @endforeach
                 </tbody>
             </table>
         </div>
+    </div>
+</div>
+
+
+
+{{-- modal new event --}}
+
+<div class="modal fade" id="newevent" tabindex="-1" aria-labelledby="newevent" aria-modal="true" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">New message</h5>
+          <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form class="form theme-form" method="POST" enctype="multipart/form-data"
+        action="{{route('event.store')}}">
+        <div class="modal-body">
+            @csrf
+            <div class="card-body">
+                <div class="row">
+                    <div class="col">
+                        <div class="mb-3 row">
+                            <label class="col-sm-3 col-form-label">Nama event</label>
+                            <div class="col-sm-9">
+                                <input class="form-control" name="nama_event"
+                                     type="text" value="{{old('nama_event')}}">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label class="col-sm-3 col-form-label">Lokasi</label>
+                            <div class="col-sm-9">
+                                <input class="form-control" name="lokasi"
+                                    type="text">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label class="col-sm-3 col-form-label">Max. Pembelian</label>
+                            <div class="col-sm-9">
+                                <input class="form-control" name="max_buy" value="{{old('max_buy')}}"
+                                     type="number">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label class="col-sm-3 col-form-label">Buka Registrasi</label>
+                            <div class="col-sm-9">
+                                <input class="form-control digits" name="buka_regis" type="datetime-local"
+                                value="{{old('buka_regis')}}">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label class="col-sm-3 col-form-label">Tutup Registrasi</label>
+                            <div class="col-sm-9">
+                                <input class="form-control digits" name="tutup_regis" type="datetime-local"
+                                value="{{old('tutup_regis')}}">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label class="col-sm-3 col-form-label">Mulai Event</label>
+                            <div class="col-sm-9">
+                                <input class="form-control digits" name="mulai_event" type="datetime-local"
+                                value="{{old('mulai_event')}}">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label class="col-sm-3 col-form-label">Selesai Event</label>
+                            <div class="col-sm-9">
+                                <input class="form-control digits" name="selesai_event" type="datetime-local"
+                                value="{{old('selesai_event')}}">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label class="col-sm-3 col-form-label">Visibilitas</label>
+                            <div class="col-sm-9">
+                                <div class="form-group m-t-15 custom-radio-ml">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="radio radio-primary">
+                                                <input id="visibility1" type="radio" name="visibility" value="1"
+                                                    @if (old('visibility') == 1) checked @endif>
+                                                <label for="visibility1">Terlihat</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="radio radio-primary">
+                                                <input id="visibility0" type="radio" name="visibility" value="0"
+                                                    @if (old('visibility') == 0) checked @endif>
+                                                <label for="visibility0">Tidak Terlihat</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label class="col-sm-3 col-form-label">Sinopsis</label>
+                            <div class="col-sm-9">
+                                <textarea class="form-control" name="sinopsis"
+                                    rows="3">{{old('sinopsis')}}</textarea>
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label class="col-sm-3 col-form-label">Deskripsi</label>
+                            <div class="col-sm-9">
+                                <textarea class="form-control" name="deskripsi"
+                                    rows="3">{{old('deskripsi')}}</textarea>
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label class="col-sm-3 col-form-label">Upload File</label>
+                            <div class="col-sm-9">
+                                <input name="img_url" class="form-control" type="file">
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Close</button>
+          <button class="btn btn-primary" type="submit">Submit</button>
+        </div>
+    </form>
+      </div>
     </div>
 </div>
 

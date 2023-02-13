@@ -7662,7 +7662,7 @@ table tbody .border-bottom-warning td {
   min-height: 100vh;
   text-align: center; }
   .error-wrapper.maintenance-bg {
-    background-image: url(https://admin.pixelstrap.com/viho/assets/images/other-images/maintenance-bg.jpg);
+    background-image: url(../images/other-images/maintenance-bg.jpg);
     background-blend-mode: overlay; }
   .error-wrapper .maintenance-icons li i {
     color: rgba(36, 105, 92, 0.5);
@@ -11160,7 +11160,7 @@ label {
      27. Coming Soon CSS Start
 ==========================**/
 .comingsoon-bgimg {
-  background: url(https://admin.pixelstrap.com/viho/assets/images/other-images/coming-soon-bg.jpg);
+  background: url(../images/other-images/coming-soon-bg.jpg);
   background-position: bottom;
   background-size: cover; }
 
@@ -11974,11 +11974,11 @@ td.highlight {
   background-color: #e6edef !important; }
 
 td.details-control {
-  background: url("https://admin.pixelstrap.com/viho/assets/images/details_open.png") no-repeat center center;
+  background: url("../images/details_open.png") no-repeat center center;
   cursor: pointer; }
 
 tr.shown td.details-control {
-  background: url("https://admin.pixelstrap.com/viho/assets/images/details_close.png") no-repeat center center; }
+  background: url("../images/details_close.png") no-repeat center center; }
 
 .dataTables_scroll ~ .dataTables_paginate {
   margin-top: 20px !important; }
@@ -26182,7 +26182,7 @@ body.dark-sidebar .main-navbar ul.nav-pills {
   margin: 35px auto; }
 
 .profile-greeting {
-  background-image: url(https://admin.pixelstrap.com/viho/assets/images/dashboard/bg.jpg);
+  background-image: url(../images/dashboard/bg.jpg);
   background-size: cover !important;
   background-repeat: no-repeat;
   background-position: center center;
@@ -26749,7 +26749,7 @@ span.twitter-typeahead .tt-suggestion {
     color: #fff; }
 
 .mobile-clock-widget {
-  background: url(https://admin.pixelstrap.com/viho/assets/images/other-images/mobile-clock-wallpaper.jpg);
+  background: url(../images/other-images/mobile-clock-wallpaper.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   height: 350px;
@@ -26783,15 +26783,15 @@ span.twitter-typeahead .tt-suggestion {
     height: 175px;
     width: 175px;
     display: block;
-    background: url(https://admin.pixelstrap.com/viho/assets/images/other-images/clock-face.png) 5% center no-repeat; }
+    background: url(../images/other-images/clock-face.png) 5% center no-repeat; }
   .mobile-clock-widget .sec {
-    background: url(https://admin.pixelstrap.com/viho/assets/images/sec.svg);
+    background: url(../images/sec.svg);
     z-index: 3; }
   .mobile-clock-widget .min {
-    background: url(https://admin.pixelstrap.com/viho/assets/images/min.svg);
+    background: url(../images/min.svg);
     z-index: 2; }
   .mobile-clock-widget .hour {
-    background: url(https://admin.pixelstrap.com/viho/assets/images/hour.svg);
+    background: url(../images/hour.svg);
     z-index: 1; }
 
 .mobile-clock-widget #date {
@@ -26805,7 +26805,7 @@ span.twitter-typeahead .tt-suggestion {
   height: 250px; }
 
 .calender-widget .cal-img {
-  background: url(https://admin.pixelstrap.com/viho/assets/images/other-images/calender-bg.png);
+  background: url(../images/other-images/calender-bg.png);
   background-size: cover;
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
@@ -27492,7 +27492,7 @@ span.twitter-typeahead .tt-suggestion {
         color: #24695c; }
   .target-sec .card-body .traget-img-sec {
     width: 100%;
-    background-image: url("https://admin.pixelstrap.com/viho/assets/images/dashboard-2/target1.png");
+    background-image: url("../images/dashboard-2/target1.png");
     height: 415px;
     background-position: center;
     background-size: cover;

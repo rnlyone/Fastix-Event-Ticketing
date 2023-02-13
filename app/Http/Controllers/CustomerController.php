@@ -43,12 +43,16 @@ class CustomerController extends Controller
         date_default_timezone_set('Asia/Makassar');
 
         $tikets = OrderDetail::where('order_details.id_cust', auth()->user()->id)
-            ->join('tickets', 'tickets.id', '=', 'order_details.id_tiket')
-            ->join('events', 'events.id', '=', 'tickets.id_event')
-            ->where('events.selesai_event', '>', date('Y-m-d H:i:s'))
-            ->join('orders', 'orders.id', '=', 'order_details.id_order')
-            ->where('orders.status_bayar', '=', 'sukses')
-            ->get();
+        ->join('tickets', 'tickets.id', '=', 'order_details.id_tiket')
+        ->join('events', 'events.id', '=', 'tickets.id_event')
+        ->where('events.selesai_event', '>', date('Y-m-d H:i:s'))
+        ->join('orders', 'orders.id', '=', 'order_details.id_order')
+        ->select('order_details.*', 'orders.status_bayar as status_bayar', 'orders.id as id_order')
+        ->where('orders.status_bayar', '=', 'sukses')->orderBy('created_at', 'desc')
+        ->get();
+
+
+            // dd($tikets);
 
         return view('pwa.cust.ticket', [
             'ticket' => 'active-nav',
@@ -81,19 +85,19 @@ class CustomerController extends Controller
         $event = Event::where('uuid', $request->id_event)->where('visibility', 1)->first();
 
         if ($event != NULL) {
+            $riwayat = Riwayat::where('id_cust', auth()->user()->id)
+            ->where('id_event', $event->id)->first();
+
+            if (!$riwayat) {
+            // add to riwayat if not exists
+            $riwayat = new Riwayat();
+            $riwayat->id_cust = auth()->user()->id;
+            $riwayat->id_event = $event->id;
+            $riwayat->save();
+            }
             return redirect()->route('cust.event', ['uuid' => $event->uuid]);
         } else {
             return back()->with('gagal', 'Event Tidak Ada');
-        }
-
-        $riwayat = Riwayat::where('id_cust', Auth::guard('cust')->user()->id)
-                            ->where('id_event', $event->id)->first();
-        if (!$riwayat) {
-            // add to riwayat if not exists
-            $riwayat = new Riwayat();
-            $riwayat->id_cust = Auth::guard('cust')->user()->id;
-            $riwayat->id_event = $event->id;
-            $riwayat->save();
         }
 
 

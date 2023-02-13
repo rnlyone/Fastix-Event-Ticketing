@@ -37,6 +37,7 @@ class EventFactory extends Factory
             'selesai_event' => $selesai_event,
             'img_url' => fake()->imageUrl(1080, 1920, 'event'),
             'visibility' => fake()->boolean,
+            'soft_delete' => fake()->boolean,
         ];
     }
 }

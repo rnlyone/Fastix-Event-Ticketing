@@ -77,18 +77,6 @@ class User extends Authenticatable
         return $this->hasMany(Order::class, 'id_event');
     }
 
-    public static function create(array $attributes = [])
-    {
-        if (static::where('id', $attributes['id'])->exists()) {
-            if(static::where('id', $attributes['id'])->has('Customer')->first()){
-                throw new Exception('User already have record in Customer');
-            }elseif(static::where('id', $attributes['id'])->has('EO')->first()){
-                throw new Exception('User already have record in EO');
-            }
-        }
-        return parent::create($attributes);
-    }
-
     public function hasRole($role)
     {
         return $this->role === $role;

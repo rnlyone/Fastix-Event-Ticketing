@@ -28,7 +28,7 @@
             @foreach ($order->details as $detail)
             <div class="d-flex mb-3">
                 <div>
-                    <img src="{{$detail->ticket->event->img_url}}" style="
+                    <img src="{{Storage::url('/img_url_event/' . $detail->ticket->event->img_url)}}" style="
                         border-radius: 12px;
                         height: 32px !important;
                         line-height: 32px !important;
@@ -63,5 +63,23 @@
         </div>
     </div>
 </div>
+
+@if (session()->get('sukses'))
+<div id="menu-success-2" class="menu menu-box-modal bg-green-dark rounded-m" data-menu-height="310" data-menu-width="350">
+    <h1 class="text-center mt-4"><i class="fa fa-3x fa-check-circle scale-box color-white shadow-xl rounded-circle"></i></h1>
+    <h1 class="text-center mt-3 font-700 color-white">Pembayaran Sukses</h1>
+    <p class="boxed-text-l color-white opacity-70">
+        kamu telah diarahkan ke halaman invoice.
+    </p>
+    <a href="#" class="close-menu btn btn-m btn-center-m button-s shadow-l rounded-s text-uppercase font-600 bg-white color-black">Great, Thanks!</a>
+</div>
+
+<script>
+        window.onload = (event) => {
+    var successmodal1 = document.getElementById("menu-success-2");
+            successmodal1.classList.add("menu-active");
+            sendtocontroller(result);}
+</script>
+@endif
 
 @include('pwa.layouts.footer')

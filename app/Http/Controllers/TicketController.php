@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Event;
 use App\Models\Ticket;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 
 class TicketController extends Controller
 {
@@ -33,9 +35,39 @@ class TicketController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $uuid)
     {
-        //
+        $validatedData = $request->validate([
+            'nama_tiket' => 'required|string',
+            'harga' => 'required|integer',
+            'kuota' => 'required|integer',
+        ]);
+
+        $ticket = new Ticket;
+        $ticket->id_event = Event::where('uuid', $uuid)->get()->id;
+        $ticket->nama_tiket = $request->input('nama_tiket');
+        $ticket->harga = $request->input('harga');
+        $ticket->kuota = $request->input('kuota');
+        $ticket->save();
+
+        return back()->with('sukses', 'Tiket berhasil ditambahkan');
+    }
+
+    public function newupdate(Request $request, $uuidtix)
+    {
+        $validatedData = $request->validate([
+            'nama_tiket' => 'required|string',
+            'harga' => 'required|integer',
+            'kuota' => 'required|integer',
+        ]);
+
+        $ticket = Ticket::find(Crypt::decryptString($uuidtix));
+        $ticket->nama_tiket = $request->input('nama_tiket');
+        $ticket->harga = $request->input('harga');
+        $ticket->kuota = $request->input('kuota');
+        $ticket->save();
+        return back()->with('sukses', 'Ticket berhasil diupdate');
+
     }
 
     /**

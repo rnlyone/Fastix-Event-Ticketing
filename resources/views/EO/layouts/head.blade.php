@@ -24,6 +24,7 @@
     <!-- Feather icon-->
     <link rel="stylesheet" type="text/css" href={{asset("assets/css/feather-icon.css")}}>
     <!-- Plugins css start-->
+    <link rel="stylesheet" type="text/css" href={{asset("assets/css/datatables.css")}}>
     <link rel="stylesheet" type="text/css" href={{asset("assets/css/animate.css")}}>
     <link rel="stylesheet" type="text/css" href={{asset("assets/css/chartist.css")}}>
     <link rel="stylesheet" type="text/css" href={{asset("assets/css/date-picker.css")}}>
@@ -37,4 +38,9 @@
     <link id="color" rel="stylesheet" href={{asset("assets/css/color-1.css")}} media="screen">
     <!-- Responsive css-->
     <link rel="stylesheet" type="text/css" href={{asset("assets/css/responsive.css")}}>
+
+
+        @if ($pagetitle == ('Attendance Event'))
+            <meta name="csrf-token" content="{{ csrf_token() }}">
+        @endif
 </head>

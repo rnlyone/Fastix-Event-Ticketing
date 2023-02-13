@@ -28,8 +28,8 @@ return new class extends Migration
             $table->dateTime('selesai_event');
             $table->string('img_url');
             $table->boolean('visibility');
+            $table->boolean('soft_delete');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
