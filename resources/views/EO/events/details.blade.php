@@ -235,7 +235,7 @@ use Illuminate\Support\Facades\Crypt;
           <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <form class="form theme-form" method="POST" enctype="multipart/form-data"
-        action="{{route('ticket.store', ['uuid', $eventdetail->uuid])}}">
+        action="{{route('ticket.store', ['uuid' => $eventdetail->uuid])}}">
         <div class="modal-body">
             @csrf
             <div class="card-body">
