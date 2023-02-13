@@ -43,8 +43,10 @@ class TicketController extends Controller
             'kuota' => 'required|integer',
         ]);
 
+        $event = Event::where('uuid', $uuid)->first();
+
         $ticket = new Ticket;
-        $ticket->id_event = Event::where('uuid', $uuid)->get()->id;
+        $ticket->id_event = $event->id;
         $ticket->nama_tiket = $request->input('nama_tiket');
         $ticket->harga = $request->input('harga');
         $ticket->kuota = $request->input('kuota');
