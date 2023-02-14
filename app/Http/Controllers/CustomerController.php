@@ -218,7 +218,7 @@ class CustomerController extends Controller
     {
         // Validate file size and aspect ratio
         $validatedData = $request->validate([
-            'profile_pict' => 'required|image|dimensions:ratio=1/1|max:2048',
+            'profile_pict' => 'required|image|max:2048',
         ]);
 
         // If validation passes, store the file
