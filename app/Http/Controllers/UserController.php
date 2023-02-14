@@ -17,6 +17,18 @@ class UserController extends Controller
         if ($agent->isMobile()) {
                 return view('pwa.cust.login', ['login' => 'active-nav']);
         } else {
+                return redirect()->route('flogineo');
+        }
+
+    }
+
+    public function flogineo()
+    {
+        $agent = new Agent();
+
+        if ($agent->isMobile()) {
+                return redirect()->route('flogin', ['login' => 'active-nav']);
+        } else {
                 return view('EO.login');
         }
 
@@ -29,7 +41,7 @@ class UserController extends Controller
         if ($agent->isMobile()) {
                 return view('pwa.cust.register', ['login' => 'active-nav']);
         } else {
-                return view('EO.register');
+                return view('EO.registereo');
         }
 
     }

@@ -39,6 +39,8 @@ Route::group(['middleware'=>['guest']], function(){
     Route::post('/login', [UserController::class, 'login'])->name('login');
     Route::get('/register', [UserController::class, 'fregister'])->name('fregister');
     Route::post('/register', [UserController::class, 'register'])->name('register');
+
+    Route::get('/logineo', [UserController::class, 'flogineo'])->name('flogineo');
 });
 
 Route::group(['middleware'=>['auth']], function(){

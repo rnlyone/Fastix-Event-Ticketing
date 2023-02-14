@@ -83,12 +83,12 @@
                                 <div class="checkbox">
                                     <input id="checkbox1" type="checkbox">
                                     <label for="checkbox1">Remember password</label>
-                                </div><a class="link" href="/theme/forget-password.html">Forgot password?</a>
+                                </div><a class="link disabled" href="#">Lupa Password?</a>
                             </div>
                             <div class="form-group">
                                 <button class="btn btn-primary btn-block" type="submit">Sign in</button>
                             </div>
-                            <p>Don't have account?<a class="ms-2" href="/theme/log-in.html">Create Account</a></p>
+                            <p>Belum Punya Akun EO?<a class="ms-2" href="{{route('register')}}">Buat Akun EO</a></p>
                             @include('EO.layouts.flasher')
                         </form>
                     </div>

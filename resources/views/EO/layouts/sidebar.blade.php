@@ -73,13 +73,13 @@
                         </a>
                     </li>
                     <li class="dropdown">
-                        <a class="nav-link menu-title link-nav {{$transaksiac ?? ''}}" href="/theme/jsgrid-table.html">
+                        <a class="nav-link menu-title link-nav {{$transaksiac ?? ''}} disabled" href="/theme/jsgrid-table.html">
                             <i data-feather="briefcase"></i>
                             <span>Transaksi</span>
                         </a>
                     </li>
                     <li class="dropdown">
-                        <a class="nav-link menu-title link-nav {{$payoutsac ?? ''}}" href="/theme/jsgrid-table.html">
+                        <a class="nav-link menu-title link-nav {{$payoutsac ?? ''}} disabled" href="/theme/jsgrid-table.html">
                             <i data-feather="dollar-sign"></i>
                             <span>Payouts</span>
                         </a>
@@ -96,7 +96,7 @@
                         </a>
                     </li>
                     <li class="dropdown">
-                        <a class="nav-link menu-title link-nav" href="#">
+                        <a class="nav-link menu-title link-nav" href="{{route('logout')}}">
                             <i data-feather="log-out"></i>
                             <span>Logout</span>
                         </a>
