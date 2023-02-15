@@ -84,20 +84,28 @@ class CustomerController extends Controller
     {
         $event = Event::where('uuid', $request->id_event)->where('visibility', 1)->first();
 
-        if ($event != NULL) {
-            $riwayat = Riwayat::where('id_cust', auth()->user()->id)
-            ->where('id_event', $event->id)->first();
+        if(Auth::check()){
+            if ($event != NULL) {
+                $riwayat = Riwayat::where('id_cust', auth()->user()->id)
+                ->where('id_event', $event->id)->first();
 
-            if (!$riwayat) {
-            // add to riwayat if not exists
-            $riwayat = new Riwayat();
-            $riwayat->id_cust = auth()->user()->id;
-            $riwayat->id_event = $event->id;
-            $riwayat->save();
+                if (!$riwayat) {
+                // add to riwayat if not exists
+                $riwayat = new Riwayat();
+                $riwayat->id_cust = auth()->user()->id;
+                $riwayat->id_event = $event->id;
+                $riwayat->save();
+                }
+                return redirect()->route('cust.event', ['uuid' => $event->uuid]);
+            } else {
+                return back()->with('gagal', 'Event Tidak Ada');
             }
-            return redirect()->route('cust.event', ['uuid' => $event->uuid]);
-        } else {
-            return back()->with('gagal', 'Event Tidak Ada');
+        }else{
+            if ($event != NULL) {
+                return redirect()->route('cust.event', ['uuid' => $event->uuid]);
+            } else {
+                return back()->with('gagal', 'Event Tidak Ada');
+            }
         }
 
 

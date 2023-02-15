@@ -59,6 +59,7 @@
             </div>
         </div>
     </div>
+    @auth
     @if ($eventdetail->selesai_event > date('Y-m-d H:i:s'))
         <a href="#" data-menu="menu-cart-item"
         class="btn btn-full btn-margins rounded-sm gradient-highlight font-14 font-600 btn-xl">Reservasi Tiket</a>
@@ -66,6 +67,11 @@
         <a href="#"
         class="btn btn-border btn-full btn-margins rounded-sm border-blue-dark color-blue-dark font-14 font-600 btn-xl">Event Sudah Selesai</a>
     @endif
+    @endauth
+    @guest
+        <a href="{{route('login')}}"
+        class="btn btn-full btn-margins rounded-sm gradient-highlight font-14 font-600 btn-xl">Login</a>
+    @endguest
 </div>
 
 
@@ -130,13 +136,7 @@
             </div>
             <div class="divider divider-margins mb-3"></div>
             <div class="row mb-3">
-                <div class="col-4">
-                    <a href="#"
-                        onclick="document.getElementsByName('order')[0].value='0'; document.getElementById('ticketform').submit();"
-                        class="close-menu btn btn-full gradient-green font-13 btn-m font-600rounded-s "><i
-                            class="fa fa-plus"></i><i class="fa fa-right"></i><i class="fa fa-shopping-cart"></i></a>
-                </div>
-                <div class="col-8">
+                <div class="col-12">
                     <a href="#"
                         onclick="document.getElementsByName('order')[0].value='1'; document.getElementById('ticketform').submit();"
                         class="close-menu btn btn-full gradient-blue font-13 btn-m font-600 rounded-s ">Order

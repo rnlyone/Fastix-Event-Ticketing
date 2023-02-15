@@ -39,7 +39,6 @@ Route::group(['middleware'=>['guest']], function(){
     Route::post('/login', [UserController::class, 'login'])->name('login');
     Route::get('/register', [UserController::class, 'fregister'])->name('fregister');
     Route::post('/register', [UserController::class, 'register'])->name('register');
-
     Route::get('/logineo', [UserController::class, 'flogineo'])->name('flogineo');
 });
 
@@ -50,8 +49,7 @@ Route::group(['middleware'=>['auth']], function(){
         Route::post('/cust/profile/update', [CustomerController::class, 'newupdate'])->name('cust.updateprofile');
         Route::post('/cust/profile/updateimg', [CustomerController::class, 'newupdateimg'])->name('cust.updatepp');
         Route::get('/cust/ticket', [CustomerController::class, 'custTicket'])->name('cust.ticket');
-        Route::get('/cust/scan', [CustomerController::class, 'custScan'])->name('cust.scan');
-        Route::get('/cust/event/{uuid}', [CustomerController::class, 'custEvent'])->name('cust.event');
+        // Route::get('/cust/event/{uuid}', [CustomerController::class, 'custEvent'])->name('cust.event');
         Route::get('/cust/transaction', [CustomerController::class, 'custTransaction'])->name('cust.transaction');
         Route::get('/cust/checkout/{uuid}', [OrderController::class, 'fcheckout'])->name('cust.checkout');
         Route::get('/cust/invoice/{uuid}', [OrderController::class, 'finvoice'])->name('cust.invoice');
@@ -60,7 +58,6 @@ Route::group(['middleware'=>['auth']], function(){
 
         Route::post('/cust/ordernow', [OrderController::class, 'ordernow'])->name('cust.ordernow');
 
-        Route::post('/scan', [CustomerController::class, 'scan'])->name('scan');
 
         Route::resource('cust', CustomerController::class)->except('index');
         Route::resource('order', OrderController::class);
@@ -94,3 +91,10 @@ Route::get('/menumain', function () {return view('pwa.layouts.menu-main');});
 Route::get('/menushare', function () {return view('pwa.layouts.menu-share');});
 Route::get('/menucolors', function () {return view('pwa.layouts.menu-colors');});
 Route::get('/menufooter', function () {return view('pwa.layouts.menu-footer');})->name('menufooter');
+
+
+
+Route::get('/scan', [CustomerController::class, 'custScan'])->name('cust.scan');
+Route::post('/scan', [CustomerController::class, 'scan'])->name('scan');
+
+Route::get('/eventdetail/{uuid}', [CustomerController::class, 'custEvent'])->name('cust.event');

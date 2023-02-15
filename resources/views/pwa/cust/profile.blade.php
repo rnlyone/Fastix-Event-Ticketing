@@ -2,10 +2,10 @@
 <div class="page-content">
     <div class="card card-style" style="background-image: url('{{Storage::url('/profile_pict/' . $userdata->profile_pict)}}')" data-card-height="450">
         <div class="card-top">
+            <span id="upload-link" class="btn btn-s border-white color-white float-end mt-2 me-2 rounded-sm"><i
+                class="fa fa-camera pe-2"></i>Upload </span>
             <form action="{{ route('cust.updatepp') }}" method="post" enctype="multipart/form-data">
                 @csrf
-                <a href="#" id="upload-link" class="btn btn-s border-white color-white float-end mt-2 me-2 rounded-sm"><i
-                        class="fa fa-camera pe-2"></i>Upload </a>
                 <input name="profile_pict" onchange="this.form.submit()" type="file" style="display: none;" id="upload-input" accept="image/*">
             </form>
             <script>
@@ -15,10 +15,6 @@
                 });
               </script>
               <script>
-                document.getElementById("upload-link").addEventListener("click", function(e) {
-                  e.preventDefault();
-                  document.getElementById("upload-input").click();
-                });
 
                 var backgroundColor = window.getComputedStyle(document.querySelector(".card-style")).getPropertyValue("background-color");
 

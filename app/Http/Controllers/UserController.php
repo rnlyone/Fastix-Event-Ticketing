@@ -31,7 +31,6 @@ class UserController extends Controller
         } else {
                 return view('EO.login');
         }
-
     }
 
     public function fregister()
@@ -55,37 +54,48 @@ class UserController extends Controller
             'password' => 'required',
         ]);
 
-        $newuser = User::create(array_merge($validatedData, ['role' => 'cust']));
+        $newuser = new User;
+        $newuser->username = $request->username;
+        $newuser->no_hp = $request->no_hp;
+        $newuser->email = $request->email;
+        $newuser->password = bcrypt($request->password);
+        $newuser->role = 'cust';
+        $newuser->profile_pict = 'default.png';
+        $newuser->save();
 
         Auth::login($newuser);
+
+        return redirect()->route('cust')->with('sukses', 'Berhasil Login');
     }
 
     public function login(Request $request)
     {
-        $validatedData = $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
+        $user = User::where('email', $request->email)->first();
+
+        $attr = request()->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required', 'min:8'],
         ]);
 
-        $user = User::whereEmail($validatedData['email'])->first();
+        if (Auth::attempt($attr)){
 
-        if (!$user || !Hash::check($validatedData['password'], $user->password)) {
-            return redirect()->back()->withErrors(['email' => 'Email atau password salah.']);
-        }
+            Auth::login($user);
+            $agent = new Agent();
 
-        Auth::login($user);
-        $agent = new Agent();
+            if ($user->role === 'cust') {
 
-        if ($user->role === 'cust') {
+                if ($agent->isMobile()) {
+                    return redirect()->route('cust');
+                } else {
+                        return redirect()->route('logout')->with('gagal', 'Akun Tersebut adalah Akun Customer, Login di Mobile');
+                }
 
-            if ($agent->isMobile()) {
-                return redirect()->route('cust');
-            } else {
-                    return redirect()->route('logout')->with('gagal', 'Akun Tersebut adalah Akun Customer, Login di Mobile');
+            } else if ($user->role === 'EO') {
+                return redirect()->route('EO');
             }
-
-        } else if ($user->role === 'EO') {
-            return redirect()->route('EO');
+        return redirect()->intended('/dash')->with('sukses', "Login Sukses");
+        } else {
+            return back()->with('gagal', 'Username / Password Salah!');
         }
     }
 
