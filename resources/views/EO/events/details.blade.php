@@ -327,3 +327,5 @@ use Illuminate\Support\Facades\Crypt;
 @endforeach
 
 @include('EO.layouts.footer')
+<script src="{{asset("assets/js/touchspin/touchspin.js")}}"></script>
+<script src="{{asset("assets/js/touchspin/input-groups.min.js")}}"></script>

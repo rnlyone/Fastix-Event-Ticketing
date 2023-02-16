@@ -113,8 +113,9 @@
                         <div class="mb-3 row">
                             <label class="col-sm-3 col-form-label">Max. Pembelian</label>
                             <div class="col-sm-9">
-                                <input class="form-control" name="max_buy" value="{{old('max_buy')}}"
-                                     type="number">
+                                <div class="input-group">
+                                    <input value="{{$eventdetail->max_buy ?? "0"}}" name="max_buy" class="touchspin" type="text">
+                                </div>
                             </div>
                         </div>
                         <div class="mb-3 row">
@@ -203,3 +204,6 @@
 </div>
 
 @include('EO.layouts.footer')
+
+<script src="{{asset("assets/js/touchspin/touchspin.js")}}"></script>
+<script src="{{asset("assets/js/touchspin/input-groups.min.js")}}"></script>
