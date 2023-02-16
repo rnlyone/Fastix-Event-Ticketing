@@ -97,7 +97,7 @@ class EventController extends Controller
                     return redirect()->route('event.attend',['uuid' => $tix->orderdetail->ticket->event->uuid])->with(['tix' => $tix, 'gagal' => 'tiket Sudah Digunakan Sebelumnya']);
                 }
             } else{
-                return redirect()->route('event.attend',['uuid' => $tix->orderdetail->ticket->event->uuid])->with(['tix' => $tix, 'gagal' => 'tiket bukan untuk event ini']);
+                return redirect()->route('event.attend',['uuid' => $request->id_event])->with(['tix' => $tix, 'gagal' => 'tiket bukan untuk event ini']);
             }
 
         } catch (\Throwable $th) {
