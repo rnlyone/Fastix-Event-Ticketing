@@ -145,8 +145,7 @@ class OrderController extends Controller
             'order' => $order,
             'adminfee' => $adminfee,
             'transaksi' => 'active-nav',
-        ]);
-
+        ])->with('sukses', 'Cek Tiket Kamu');
     }
 
     public function response(Request $request)
