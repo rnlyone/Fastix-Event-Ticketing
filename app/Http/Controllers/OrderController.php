@@ -133,6 +133,14 @@ class OrderController extends Controller
     {
         $adminfee = 5500;
         $order = Order::where('uuid', $uuid)->first();
+
+        if(session()->get('sukses') != null){
+            return view('pwa.cust.trc.trcinvoice', [
+                'order' => $order,
+                'adminfee' => $adminfee,
+                'transaksi' => 'active-nav',
+            ])->with('sukses', 'Cek Tiket Kamu');
+        }
         return view('pwa.cust.trc.trcinvoice', [
             'order' => $order,
             'adminfee' => $adminfee,
