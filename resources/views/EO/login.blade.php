@@ -89,7 +89,7 @@
                                 <button class="btn btn-primary btn-block" type="submit">Sign in</button>
                             </div>
                             <p>Belum Punya Akun EO?<a class="ms-2" href="{{route('register')}}">Buat Akun EO</a></p>
-                            @include('EO.layouts.flasher')
+                        @include('EO.layouts.flasher')
                         </form>
                     </div>
                 </div>

@@ -11,9 +11,9 @@
     <div class="card card-style">
         <div class="content">
             <p class="font-600 color-highlight mb-n1">Let's start</p>
-            <h1 class="font-30">Sign In</h1>
+            <h1 class="font-30">Register</h1>
             <p>
-                Masukkan Akun Anda di bawah ini untuk masuk ke akun Anda.
+                Buat Akun anda disini.
             </p>
             <form action="{{route('register')}}" method="POST">
                 @csrf
@@ -34,9 +34,9 @@
                     <em>(required)</em>
                 </div>
                 <div class="input-style no-borders has-icon validate-field mb-4">
-                    <i class="fa fa-user"></i>
-                    <input type="number" name="no_hp" class="form-control validate-nomor_telepon" id="form1" placeholder="Nomor Telepon">
-                    <label for="form1a" class="color-highlight">Nomor Telepon</label>
+                    <i class="fa fa-phone" aria-hidden="true"></i>
+                    <input type="number" name="no_hp" class="form-control validate-nomor_telepon" id="form1" placeholder="8123456789 (No. Telepon)">
+                    <label for="form1a" class="color-highlight">812345678</label>
                     <i class="fa fa-times disabled invalid color-red-dark"></i>
                     <i class="fa fa-check disabled valid color-green-dark"></i>
                     <em>(required)</em>
@@ -51,7 +51,7 @@
                 </div>
                 <div class="input-style no-borders has-icon validate-field mb-4">
                     <i class="fa fa-lock"></i>
-                    <input type="confirm_password" name="confirm_password" class="form-control validate-confirm_password" id="form1ab" placeholder="Confirm Password">
+                    <input type="password" name="confirm_password" class="form-control validate-password" id="form1ab" placeholder="Confirm Password">
                     <label for="form1ab" class="color-highlight">Confirm Password</label>
                     <i class="fa fa-times disabled invalid color-red-dark"></i>
                     <i class="fa fa-check disabled valid color-green-dark"></i>

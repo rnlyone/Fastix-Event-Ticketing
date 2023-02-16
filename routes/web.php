@@ -98,3 +98,9 @@ Route::get('/scan', [CustomerController::class, 'custScan'])->name('cust.scan');
 Route::post('/scan', [CustomerController::class, 'scan'])->name('scan');
 
 Route::get('/eventdetail/{uuid}', [CustomerController::class, 'custEvent'])->name('cust.event');
+
+Route::get('/offline', function () {
+
+    return view('laravelpwa::offline');
+
+    });

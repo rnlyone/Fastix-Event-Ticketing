@@ -48,18 +48,24 @@ class UserController extends Controller
     public function register(Request $request)
     {
         $validatedData = $request->validate([
-            'username' => 'required',
-            'no_hp' => 'required|numeric',
-            'email' => 'required|email',
-            'password' => 'required',
+            'username' => 'required|unique:users,username',
+            'no_hp' => 'required|numeric|unique:users,no_hp',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:8',
         ]);
+
+        $agent = new Agent;
 
         $newuser = new User;
         $newuser->username = $request->username;
         $newuser->no_hp = $request->no_hp;
         $newuser->email = $request->email;
         $newuser->password = bcrypt($request->password);
-        $newuser->role = 'cust';
+        if($agent->isMobile()){
+            $newuser->role = 'cust';
+        }else{
+            $newuser->role = 'eo';
+        }
         $newuser->profile_pict = 'default.png';
         $newuser->save();
 
@@ -101,18 +107,36 @@ class UserController extends Controller
 
     public function logout()
     {
-        Auth::logout();
+        $user = auth()->user();
 
-        if(session()->get('gagal')){
-            $getflash = session('gagal') ;
+        $agent = new Agent();
+
+        if ($user->role === 'cust'){
+            Auth::logout();
+            if(session()->get('gagal')){
+                $getflash = session('gagal') ;
+            } else {
+                $getflash = NULL;
+            }
+            // dd($getflash);
+            if ($getflash != NULL){
+                return redirect('/logineo')->with('gagal', $getflash);
+            }else{
+                return redirect('/login');
+            }
         } else {
-            $getflash = NULL;
-        }
-        // dd($getflash);
-        if ($getflash != NULL){
-            return redirect('/login')->with('gagal', $getflash);
-        }else{
-            return redirect('/login');
+            Auth::logout();
+            if(session()->get('gagal')){
+                $getflash = session('gagal') ;
+            } else {
+                $getflash = NULL;
+            }
+            // dd($getflash);
+            if ($getflash != NULL){
+                return redirect('/login')->with('gagal', $getflash);
+            }else{
+                return redirect('/logineo');
+            }
         }
     }
 

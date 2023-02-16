@@ -20,13 +20,13 @@ var filesToCache = [
     '/images/icons/splash-1668x2224.png',
     '/images/icons/splash-1668x2388.png',
     '/images/icons/splash-2048x2732.png',
-    '/v30/scripts/bootstrap.min.js',
+    '/scripts/bootstrap.min.js',
     '/assets/css/vendor/bootstrap.min.css',
-    '/v30/fonts/bootstrap-icons.css',
-    '/v30/styles/bootstrap.css',
-    '/v30/scripts/custom.js'
+    '/scripts/custom.js',
+    '/fonts/css/fontawesome-all.min.css',
+    '/styles/bootstrap.css'
 ];
-var APP_NAME = 'Kyanpu';
+var APP_NAME = 'FASTIX';
 var APP_VER = '1.0';
 var CACHE_NAME = APP_NAME + '-' + APP_VER;
 const OFFLINE_URL = '/offline';
@@ -73,7 +73,7 @@ self.addEventListener('activate', function(event) {
 });
 
 self.addEventListener('fetch', function(event) {
-    // console.log('[Service Worker] Fetch', event.request.url);
+    console.log('[Service Worker] Fetch', event.request.url);
     if (event.request.mode === 'navigate') {
       event.respondWith((async () => {
         try {

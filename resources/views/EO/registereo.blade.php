@@ -44,37 +44,33 @@
         <div class="row m-0">
           <div class="col-12 p-0">
             <div class="login-card">
-              <form class="theme-form login-form">
-                <h4>Create your account</h4>
-                <h6>Enter your personal details to create account</h6>
+              <form class="theme-form login-form" action="{{route('register')}}" method="POST">
+                @csrf
+                <h4>Buat Akun EO Kamu</h4>
+                <h6>Masukkan Informasi tentang Akun EO kamu</h6>
                 <div class="form-group">
-                  <label>Your Name</label>
-                  <div class="small-group">
-                    <div class="input-group"><span class="input-group-text"><i class="icon-user"></i></span>
-                      <input class="form-control" type="text" required="" placeholder="Fist Name">
-                    </div>
-                    <div class="input-group"><span class="input-group-text"><i class="icon-user"></i></span>
-                      <input class="form-control" type="email" required="" placeholder="Last Name">
-                    </div>
+                  <label>Username</label>
+                  <div class="input-group"><span class="input-group-text"><i class="icon-user"></i></span>
+                    <input class="form-control" type="text" name="username" required="" placeholder="username" value="{{old('username')}}">
                   </div>
                 </div>
                 <div class="form-group">
                   <label>Email Address</label>
                   <div class="input-group"><span class="input-group-text"><i class="icon-email"></i></span>
-                    <input class="form-control" type="email" required="" placeholder="Test@gmail.com">
+                    <input value="{{old('email')}}" class="form-control" type="email" name="email" required="" placeholder="Test@gmail.com">
                   </div>
                 </div>
+                <div class="form-group">
+                    <label>Nomor Telepon</label>
+                    <div class="input-group"><span class="input-group-text"><i class="icon-email"></i></span>
+                      <input value="{{old('no_hp')}}" class="form-control" type="text" name="no_hp" required="" placeholder="81354000500">
+                    </div>
+                  </div>
                 <div class="form-group">
                   <label>Password</label>
                   <div class="input-group"><span class="input-group-text"><i class="icon-lock"></i></span>
-                    <input class="form-control" type="text" name="login[password]" required="" placeholder="*********">
+                    <input class="form-control" type="text" name="password" required="" placeholder="*********">
                     <div class="show-hide"><span class="">                         </span></div>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <div class="checkbox">
-                    <input id="checkbox1" type="checkbox">
-                    <label class="text-muted" for="checkbox1">Agree with <span>Privacy Policy                   </span></label>
                   </div>
                 </div>
                 <div class="form-group">
@@ -83,15 +79,9 @@
                 <div class="login-social-title">
                   <h5>signup with</h5>
                 </div>
-                <div class="form-group">
-                  <ul class="login-social">
-                    <li><a href="https://www.linkedin.com/login" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-linkedin"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a></li>
-                    <li><a href="https://www.linkedin.com/login" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-twitter"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg></a></li>
-                    <li><a href="https://www.linkedin.com/login" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-facebook"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a></li>
-                    <li><a href="https://www.instagram.com/login" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-instagram"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.5" y2="6.5"></line></svg></a></li>
-                  </ul>
-                </div>
-                <p>Already have an account?<a class="ms-2" href="log-in.html">Sign in</a></p>
+                <p>Sudah Punya Akun?<a class="ms-2" href="log-in.html">Sign in</a></p>
+                <p>Kamu adalah Customer?<a class="ms-2 disabled" href="#">Login di HP</a></p>
+                @include('EO.layouts.flasher')
               </form>
             </div>
           </div>

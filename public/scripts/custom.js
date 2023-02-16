@@ -8,11 +8,11 @@ document["addEventListener"]('DOMContentLoaded', () => {
     'use strict';
     let _0x3f00x1 = true;
     let _0x3f00x2 = true;
-    var _0x3f00x3 = "Appkit";
+    var _0x3f00x3 = "FASTIX";
     var _0x3f00x4 = 1;
     var _0x3f00x5 = false;
-    var _0x3f00x6 = "https://www.enableds.com/products/appkit/v25/";
-    var _0x3f00x7 = "https://www.enableds.com/products/appkit/v25/_service-worker.js";
+    var _0x3f00x6 = "/";
+    var _0x3f00x7 = "/serviceworker.js";
 
     function _0x3f00x8() {
         var _0x3f00x9, _0x3f00xa, _0x3f00xb;

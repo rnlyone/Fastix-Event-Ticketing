@@ -1,9 +1,6 @@
 <header class="main-nav">
     <div class="sidebar-user text-center">
-        <a class="setting-primary" href="javascript:void(0)">
-            <i data-feather="settings"></i>
-        </a>
-        <img class="img-90 rounded-circle" src="/assets/images/dashboard/1.png" alt="">
+        <img class="img-90 rounded-circle" src="{{Storage::url('/profile_pict/' . auth()->user()->profile_pict)}}" alt="">
         <div class="badge-bottom">
             <span class="badge badge-primary">New</span>
         </div>
@@ -30,15 +27,8 @@
                         }
                     }
                 @endphp
-                <span>{{$jumlahorder}} Tickets </span>
-                <p>Sold</p>
-            </li>
-            <li>
-                <span>
-                    <span class="counter">95.2</span>
-                    k
-                </span>
-                <p>Follower </p>
+                <span>{{$jumlahorder}} Tiket </span>
+                <p>Terjual</p>
             </li>
         </ul>
     </div>

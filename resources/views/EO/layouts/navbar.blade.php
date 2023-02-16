@@ -2,12 +2,12 @@
     <div class="main-header-right row m-0">
         <div class="main-header-left">
             <div class="logo-wrapper">
-                <a href="/theme/index.html">
+                <a href="/">
                     <img class="img-fluid" src="{{asset("/images/icons/icon-72x72.png")}}" style="height: 40px; width:40px" alt="">
                 </a>
             </div>
             <div class="dark-logo-wrapper">
-                <a href="/theme/index.html">
+                <a href="/">
                     <img class="img-fluid" src="/assets/images/logo/dark-logo.png" alt="">
             </a>
             </div>

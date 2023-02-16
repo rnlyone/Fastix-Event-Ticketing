@@ -88,13 +88,18 @@ class EventController extends Controller
         try {
             $tix = Paidtix::where('token', $request->id_token)->first();
 
+            if($tix->orderdetail->ticket->event->id == $request->id_event){
                 if($tix->status_tiket == 0){
                     $tix->status_tiket = 1;
                     $tix->save();
                     return redirect()->route('event.attend',['uuid' => $tix->orderdetail->ticket->event->uuid])->with(['tix' => $tix, 'sukses' => 'Tiket Sukses Digunakan']);
                 }else{
                     return redirect()->route('event.attend',['uuid' => $tix->orderdetail->ticket->event->uuid])->with(['tix' => $tix, 'gagal' => 'tiket Sudah Digunakan Sebelumnya']);
+                }
+            } else{
+                return redirect()->route('event.attend',['uuid' => $tix->orderdetail->ticket->event->uuid])->with(['tix' => $tix, 'gagal' => 'tiket bukan untuk event ini']);
             }
+
         } catch (\Throwable $th) {
             return redirect()->back()->with(['tix' => $tix, 'gagal' => 'Tiket Tidak Ada']);
         }

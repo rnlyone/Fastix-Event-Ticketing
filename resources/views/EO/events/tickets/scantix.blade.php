@@ -184,10 +184,12 @@ integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="ano
                 document.getElementById('scanned-result').innerHTML = content;
 
                 const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+                const event = {{$eventdetail->id}};
 
                 var formData = new FormData();
                 formData.append("id_token", content);
                 formData.append("_token", token);
+                formData.append("id_event", event);
 
                 var form = document.createElement("form");
                 form.setAttribute("method", "post");
@@ -203,8 +205,14 @@ integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="ano
                 tokenField.setAttribute("name", "_token");
                 tokenField.setAttribute("value", token);
 
+                var eventField = document.createElement("input");
+                eventField.setAttribute("type", "hidden");
+                eventField.setAttribute("name", "id_event");
+                eventField.setAttribute("value", event);
+
                 form.appendChild(hiddenField);
                 form.appendChild(tokenField);
+                form.appendChild(eventField);
 
                 document.body.appendChild(form);
                 form.submit();
