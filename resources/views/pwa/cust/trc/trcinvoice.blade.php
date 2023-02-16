@@ -74,6 +74,8 @@
     <a href="#" class="close-menu btn btn-m btn-center-m button-s shadow-l rounded-s text-uppercase font-600 bg-white color-black">Great, Thanks!</a>
 </div>
 
+@include('pwa.layouts.toaster')
+
 <script>
         window.onload = (event) => {
     var successmodal1 = document.getElementById("menu-success-2");
