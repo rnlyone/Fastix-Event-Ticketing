@@ -1,6 +1,6 @@
 @include('pwa.layouts.header', ['title' => ': Profil Saya', 'pagetitle' => 'Profil Saya', 'customcss' => ''])
 <div class="page-content">
-    <div class="card card-style" style="background-image: url('{{Storage::url('/profile_pict/' . $userdata->profile_pict)}}')" data-card-height="450">
+    <div class="card card-style" style="background-image: url('{{Storage::url('/profile_pict/' . $userdata->profile_pict) ?? Storage::url('/profile_pict/' . 'default.png')}}')" data-card-height="450">
         <div class="card-top">
             <span id="upload-link" class="btn btn-s border-white color-white float-end mt-2 me-2 rounded-sm"><i
                 class="fa fa-camera pe-2"></i>Upload </span>
@@ -15,7 +15,6 @@
                 });
               </script>
               <script>
-
                 var backgroundColor = window.getComputedStyle(document.querySelector(".card-style")).getPropertyValue("background-color");
 
                 if (backgroundColor === "rgb(255, 255, 255)") {
